@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="tail">
+        <file id="0" name="tail/tail-0.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="1" name="tail/tail-1.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="2" name="tail/tail-2.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="3" name="tail/tail-3.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="4" name="tail/tail-4.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="5" name="tail/tail-5.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="6" name="tail/tail-6.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="7" name="tail/tail-7.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="8" name="tail/tail-8.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="9" name="tail/tail-9.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="10" name="tail/tail-10.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="11" name="tail/tail-11.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+    </folder>
+    <folder id="1" name="plug_tail">
+        <file id="0" name="plug_tail/plug_tail-0.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="plug_foxtail">
+        <obj_info name="plug_foxtail_tail-0" realname="tail-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="plug_foxtail_tail-1" realname="tail-1" type="sprite">
+            <frames>
+                <i folder="0" file="1"/>
+            </frames>
+        </obj_info>
+        <obj_info name="plug_foxtail_tail-2" realname="tail-2" type="sprite">
+            <frames>
+                <i folder="0" file="2"/>
+            </frames>
+        </obj_info>
+        <obj_info name="plug_foxtail_tail-3" realname="tail-3" type="sprite">
+            <frames>
+                <i folder="0" file="3"/>
+            </frames>
+        </obj_info>
+        <obj_info name="plug_foxtail_tail-4" realname="tail-4" type="sprite">
+            <frames>
+                <i folder="0" file="4"/>
+            </frames>
+        </obj_info>
+        <obj_info name="plug_foxtail_tail-5" realname="tail-5" type="sprite">
+            <frames>
+                <i folder="0" file="5"/>
+            </frames>
+        </obj_info>
+        <obj_info name="plug_foxtail_plug_tail-0" realname="plug_tail-0" type="sprite">
+            <frames>
+                <i folder="1" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="anim" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="tail-0" folder="0" file="0" abs_x="-72" abs_y="93" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" name="tail-1" folder="0" file="1" abs_x="-149" abs_y="79" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="0" z_index="1"/>
+                    <object_ref id="2" name="tail-2" folder="0" file="2" abs_x="-166.984735" abs_y="154.519895" abs_angle="326.991297" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" name="tail-3" folder="0" file="3" abs_x="-557" abs_y="186.690647" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" name="tail-4" folder="0" file="4" abs_x="-645.489209" abs_y="65.107914" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="0" z_index="4"/>
+                    <object_ref id="5" name="tail-5" folder="0" file="5" abs_x="-509.517986" abs_y="-32.733813" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="0" z_index="5"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="tail-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="85" y="43" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="1" obj="1" name="tail-1">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="8" y="29" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="2" obj="2" name="tail-2">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="-62.564767" y="27.062176" angle="326.991297"/>
+                </key>
+            </timeline>
+            <timeline id="3" obj="3" name="tail-3">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="-400" y="136.690647" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="4" obj="4" name="tail-4">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="-488.489209" y="15.107914" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="5" obj="5" name="tail-5">
+                <key id="0" spin="0">
+                    <object folder="0" file="5" x="-352.517986" y="-82.733813" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="plug_tail-0" folder="1" file="0" abs_x="81.060441" abs_y="-11.673103" abs_angle="175.640212" abs_scale_x="0.417125" abs_scale_y="0.392301" abs_a="1" timeline="6" key="0" z_index="0"/>
+                    <object_ref id="1" name="tail-0" folder="0" file="0" abs_x="-109.51595" abs_y="56.668848" abs_angle="2.837642" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="1"/>
+                    <object_ref id="2" name="tail-1" folder="0" file="1" abs_x="-122.973425" abs_y="123.16534" abs_angle="328.462225" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="0" z_index="2"/>
+                    <object_ref id="3" name="tail-2" folder="0" file="2" abs_x="116.147394" abs_y="-36.603575" abs_angle="172.966972" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="0" z_index="3"/>
+                    <object_ref id="4" name="tail-3" folder="0" file="3" abs_x="-557" abs_y="186.690647" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="0" z_index="4"/>
+                    <object_ref id="5" name="tail-4" folder="0" file="4" abs_x="-645.489209" abs_y="65.107914" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="0" z_index="5"/>
+                    <object_ref id="6" name="tail-5" folder="0" file="5" abs_x="-509.517986" abs_y="-32.733813" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="0" z_index="6"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="tail-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="49.766839" y="14.502591" angle="2.837642"/>
+                </key>
+            </timeline>
+            <timeline id="1" obj="1" name="tail-1">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="-15.316062" y="-1.569948" angle="328.462225"/>
+                </key>
+            </timeline>
+            <timeline id="2" obj="2" name="tail-2">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="-33.549223" y="32.243523" angle="172.966972"/>
+                </key>
+            </timeline>
+            <timeline id="3" obj="3" name="tail-3">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="-400" y="136.690647" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="4" obj="4" name="tail-4">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="-488.489209" y="15.107914" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="5" obj="5" name="tail-5">
+                <key id="0" spin="0">
+                    <object folder="0" file="5" x="-352.517986" y="-82.733813" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="6" obj="6" name="plug_tail-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="47.496073" y="9.129738" pivot_x="0.700203" pivot_y="0.613581" angle="175.640212" scale_x="0.417125" scale_y="0.392301"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="lustbook">
+        <file id="0" name="lustbook/lustbook-0.png" width="114" height="170" pivot_x="0.515125" pivot_y="0.0357262"/>
+        <file id="1" name="lustbook/lustbook-1.png" width="155" height="170" pivot_x="0.515125" pivot_y="0.0357262"/>
+        <file id="2" name="lustbook/lustbook-2.png" width="232" height="146" pivot_x="0.515125" pivot_y="0.0357262"/>
+        <file id="3" name="lustbook/lustbook-3.png" width="232" height="146" pivot_x="0.515125" pivot_y="0.0357262"/>
+        <file id="4" name="lustbook/lustbook-4.png" width="232" height="146" pivot_x="0.515125" pivot_y="0.0357262"/>
+    </folder>
+    <entity id="0" name="lustbook_item">
+        <obj_info name="lustbook_item_lustbook-1" realname="lustbook-1" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="lustbook-1" folder="0" file="0" abs_x="-53.350523" abs_y="84.908137" abs_angle="1.353543" abs_scale_x="0.880546" abs_scale_y="0.865419" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="1000">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="lustbook-1">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="8.515022" y="9.409579" pivot_x="0.598361" pivot_y="0.477038" angle="1.353543" scale_x="0.880546" scale_y="0.865419"/>
+                </key>
+                <key id="1" time="1000" spin="0">
+                    <object folder="0" file="0" x="8.515022" y="9.409579" pivot_x="0.598361" pivot_y="0.477038" angle="1.353543" scale_x="0.880546" scale_y="0.865419"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

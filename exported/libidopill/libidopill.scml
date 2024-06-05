@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="pill">
+        <file id="0" name="pill/pill-0.png" width="64" height="64" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="libidopill">
+        <obj_info name="libidopill_pill-0" realname="pill-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="pill-0" folder="0" file="0" abs_x="-93.030769" abs_y="115.815385" abs_angle="360" abs_scale_x="3" abs_scale_y="3" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="pill-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="0.015385" y="2.092308" pivot_x="0.484615" pivot_y="0.407692" scale_x="3" scale_y="3"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

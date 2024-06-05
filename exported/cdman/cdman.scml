@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="cd">
+        <file id="0" name="cd/cd-0.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="cd/cd-1.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="cd/cd-2.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="cd/cd-3.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="4" name="cd/cd-4.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="5" name="cd/cd-5.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="6" name="cd/cd-6.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="7" name="cd/cd-7.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="8" name="cd/cd-8.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="9" name="cd/cd-9.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="10" name="cd/cd-10.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="11" name="cd/cd-11.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="12" name="cd/cd-12.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="13" name="cd/cd-13.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="14" name="cd/cd-14.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="15" name="cd/cd-15.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="16" name="cd/cd-16.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="17" name="cd/cd-17.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="18" name="cd/cd-18.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="19" name="cd/cd-19.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="20" name="cd/cd-20.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="21" name="cd/cd-21.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="22" name="cd/cd-22.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="23" name="cd/cd-23.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="24" name="cd/cd-24.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="25" name="cd/cd-25.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="26" name="cd/cd-26.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="27" name="cd/cd-27.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="28" name="cd/cd-28.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="29" name="cd/cd-29.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="30" name="cd/cd-30.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="31" name="cd/cd-31.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="32" name="cd/cd-32.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="33" name="cd/cd-33.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="34" name="cd/cd-34.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+        <file id="35" name="cd/cd-35.png" width="498" height="373" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="cdman">
+        <animation id="0" name="CD" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="50">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="100">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="150">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="200">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="250">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="300">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="350">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="400">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="450">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="500">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="550">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="600">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="650">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="700">
+                    <object_ref id="0" timeline="0" key="14" z_index="0"/>
+                </key>
+                <key id="15" time="750">
+                    <object_ref id="0" timeline="0" key="15" z_index="0"/>
+                </key>
+                <key id="16" time="800">
+                    <object_ref id="0" timeline="0" key="16" z_index="0"/>
+                </key>
+                <key id="17" time="850">
+                    <object_ref id="0" timeline="0" key="17" z_index="0"/>
+                </key>
+                <key id="18" time="900">
+                    <object_ref id="0" timeline="0" key="18" z_index="0"/>
+                </key>
+                <key id="19" time="950">
+                    <object_ref id="0" timeline="0" key="19" z_index="0"/>
+                </key>
+                <key id="20" time="1000">
+                    <object_ref id="0" timeline="0" key="20" z_index="0"/>
+                </key>
+                <key id="21" time="1050">
+                    <object_ref id="0" timeline="0" key="21" z_index="0"/>
+                </key>
+                <key id="22" time="1100">
+                    <object_ref id="0" timeline="0" key="22" z_index="0"/>
+                </key>
+                <key id="23" time="1150">
+                    <object_ref id="0" timeline="0" key="23" z_index="0"/>
+                </key>
+                <key id="24" time="1200">
+                    <object_ref id="0" timeline="0" key="24" z_index="0"/>
+                </key>
+                <key id="25" time="1250">
+                    <object_ref id="0" timeline="0" key="25" z_index="0"/>
+                </key>
+                <key id="26" time="1300">
+                    <object_ref id="0" timeline="0" key="26" z_index="0"/>
+                </key>
+                <key id="27" time="1350">
+                    <object_ref id="0" timeline="0" key="27" z_index="0"/>
+                </key>
+                <key id="28" time="1400">
+                    <object_ref id="0" timeline="0" key="28" z_index="0"/>
+                </key>
+                <key id="29" time="1450">
+                    <object_ref id="0" timeline="0" key="29" z_index="0"/>
+                </key>
+                <key id="30" time="1500">
+                    <object_ref id="0" timeline="0" key="30" z_index="0"/>
+                </key>
+                <key id="31" time="1550">
+                    <object_ref id="0" timeline="0" key="31" z_index="0"/>
+                </key>
+                <key id="32" time="1600">
+                    <object_ref id="0" timeline="0" key="32" z_index="0"/>
+                </key>
+                <key id="33" time="1650">
+                    <object_ref id="0" timeline="0" key="33" z_index="0"/>
+                </key>
+                <key id="34" time="1700">
+                    <object_ref id="0" timeline="0" key="34" z_index="0"/>
+                </key>
+                <key id="35" time="1750">
+                    <object_ref id="0" timeline="0" key="35" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cd">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+                <key id="1" time="50" spin="0">
+                    <object folder="0" file="1" angle="0"/>
+                </key>
+                <key id="2" time="100" spin="0">
+                    <object folder="0" file="2" angle="0"/>
+                </key>
+                <key id="3" time="150" spin="0">
+                    <object folder="0" file="3" angle="0"/>
+                </key>
+                <key id="4" time="200" spin="0">
+                    <object folder="0" file="4" angle="0"/>
+                </key>
+                <key id="5" time="250" spin="0">
+                    <object folder="0" file="5" angle="0"/>
+                </key>
+                <key id="6" time="300" spin="0">
+                    <object folder="0" file="6" angle="0"/>
+                </key>
+                <key id="7" time="350" spin="0">
+                    <object folder="0" file="7" angle="0"/>
+                </key>
+                <key id="8" time="400" spin="0">
+                    <object folder="0" file="8" angle="0"/>
+                </key>
+                <key id="9" time="450" spin="0">
+                    <object folder="0" file="9" angle="0"/>
+                </key>
+                <key id="10" time="500" spin="0">
+                    <object folder="0" file="10" angle="0"/>
+                </key>
+                <key id="11" time="550" spin="0">
+                    <object folder="0" file="11" angle="0"/>
+                </key>
+                <key id="12" time="600" spin="0">
+                    <object folder="0" file="12" angle="0"/>
+                </key>
+                <key id="13" time="650" spin="0">
+                    <object folder="0" file="13" angle="0"/>
+                </key>
+                <key id="14" time="700" spin="0">
+                    <object folder="0" file="14" angle="0"/>
+                </key>
+                <key id="15" time="750" spin="0">
+                    <object folder="0" file="15" angle="0"/>
+                </key>
+                <key id="16" time="800" spin="0">
+                    <object folder="0" file="16" angle="0"/>
+                </key>
+                <key id="17" time="850" spin="0">
+                    <object folder="0" file="17" angle="0"/>
+                </key>
+                <key id="18" time="900" spin="0">
+                    <object folder="0" file="18" angle="0"/>
+                </key>
+                <key id="19" time="950" spin="0">
+                    <object folder="0" file="19" angle="0"/>
+                </key>
+                <key id="20" time="1000" spin="0">
+                    <object folder="0" file="20" angle="0"/>
+                </key>
+                <key id="21" time="1050" spin="0">
+                    <object folder="0" file="21" angle="0"/>
+                </key>
+                <key id="22" time="1100" spin="0">
+                    <object folder="0" file="22" angle="0"/>
+                </key>
+                <key id="23" time="1150" spin="0">
+                    <object folder="0" file="23" angle="0"/>
+                </key>
+                <key id="24" time="1200" spin="0">
+                    <object folder="0" file="24" angle="0"/>
+                </key>
+                <key id="25" time="1250" spin="0">
+                    <object folder="0" file="25" angle="0"/>
+                </key>
+                <key id="26" time="1300" spin="0">
+                    <object folder="0" file="26" angle="0"/>
+                </key>
+                <key id="27" time="1350" spin="0">
+                    <object folder="0" file="27" angle="0"/>
+                </key>
+                <key id="28" time="1400" spin="0">
+                    <object folder="0" file="28" angle="0"/>
+                </key>
+                <key id="29" time="1450" spin="0">
+                    <object folder="0" file="29" angle="0"/>
+                </key>
+                <key id="30" time="1500" spin="0">
+                    <object folder="0" file="30" angle="0"/>
+                </key>
+                <key id="31" time="1550" spin="0">
+                    <object folder="0" file="31" angle="0"/>
+                </key>
+                <key id="32" time="1600" spin="0">
+                    <object folder="0" file="32" angle="0"/>
+                </key>
+                <key id="33" time="1650" spin="0">
+                    <object folder="0" file="33" angle="0"/>
+                </key>
+                <key id="34" time="1700" spin="0">
+                    <object folder="0" file="34" angle="0"/>
+                </key>
+                <key id="35" time="1750" spin="0">
+                    <object folder="0" file="35" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

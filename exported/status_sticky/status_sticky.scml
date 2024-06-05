@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="bg">
+        <file id="0" name="bg/bg-0.png" width="72" height="72" pivot_x="0.5" pivot_y="0.5"/>
+    </folder>
+    <folder id="1" name="icon">
+        <file id="0" name="icon/icon-0.png" width="52" height="80" pivot_x="0.83" pivot_y="0.4"/>
+    </folder>
+    <entity id="0" name="status_sticky">
+        <obj_info name="status_sticky_bg-0" realname="bg-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="status_sticky_icon-0" realname="icon-0" type="sprite">
+            <frames>
+                <i folder="1" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="NewAnimation" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="bg-0" folder="0" file="0" abs_x="-28" abs_y="56" abs_angle="360" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" name="icon-0" folder="1" file="0" abs_x="-16.050024" abs_y="65.15" abs_angle="360" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="0" z_index="1"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="bg-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="8" y="20"/>
+                </key>
+            </timeline>
+            <timeline id="1" obj="1" name="icon-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="10" y="23"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

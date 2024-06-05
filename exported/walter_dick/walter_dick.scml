@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="dick">
+        <file id="0" name="dick/dick-0.png" width="72" height="48" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="1" name="swap_body_tall">
+        <file id="0" name="swap_body_tall/swap_body_tall-0.png" width="108" height="76" pivot_x="0.497681" pivot_y="0.175993"/>
+        <file id="1" name="swap_body_tall/swap_body_tall-1.png" width="112" height="84" pivot_x="0.469862" pivot_y="0.157744"/>
+        <file id="2" name="swap_body_tall/swap_body_tall-2.png" width="108" height="84" pivot_x="0.456245" pivot_y="0.17203"/>
+        <file id="3" name="swap_body_tall/swap_body_tall-3.png" width="72" height="84" pivot_x="0.112146" pivot_y="0.194649"/>
+        <file id="4" name="swap_body_tall/swap_body_tall-4.png" width="80" height="80" pivot_x="0.0828063" pivot_y="0.260631"/>
+        <file id="5" name="swap_body_tall/swap_body_tall-5.png" width="80" height="88" pivot_x="0.100306" pivot_y="0.0662045"/>
+        <file id="6" name="swap_body_tall/swap_body_tall-6.png" width="324" height="264" pivot_x="0.659489" pivot_y="0.149244"/>
+        <file id="7" name="swap_body_tall/swap_body_tall-7.png" width="336" height="244" pivot_x="0.716293" pivot_y="0.14283"/>
+        <file id="8" name="swap_body_tall/swap_body_tall-8.png" width="284" height="284" pivot_x="0.578695" pivot_y="0.171217"/>
+        <file id="9" name="swap_body_tall/swap_body_tall-9.png" width="364" height="244" pivot_x="0.391894" pivot_y="0.123773"/>
+        <file id="10" name="swap_body_tall/swap_body_tall-10.png" width="240" height="280" pivot_x="1.04947" pivot_y="0.101073"/>
+        <file id="11" name="swap_body_tall/swap_body_tall-11.png" width="332" height="264" pivot_x="0.313101" pivot_y="0.146498"/>
+        <file id="12" name="swap_body_tall/swap_body_tall-12.png" width="308" height="272" pivot_x="0.566394" pivot_y="0.174542"/>
+        <file id="13" name="swap_body_tall/swap_body_tall-13.png" width="308" height="272" pivot_x="0.55724" pivot_y="0.15533"/>
+    </folder>
+    <entity id="0" name="walter_dick">
+        <obj_info name="walter_dick_dick-0" realname="dick-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="walter_dick_SWAP_BODY_TALL_0" realname="SWAP_BODY_TALL_0" type="sprite">
+            <frames>
+                <i folder="1" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="DoYouWannaLickMyDick" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="dick-0" folder="0" file="0" abs_x="-36.471507" abs_y="45.601023" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="dick-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-0.006459" y="9.576927" pivot_x="0.506459" pivot_y="0.249498" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="swap" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="SWAP_BODY_TALL_0" folder="1" file="0" abs_x="-52.999548" abs_y="106.923532" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="1" name="SWAP_BODY_TALL_0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="0.75" y="44.299" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

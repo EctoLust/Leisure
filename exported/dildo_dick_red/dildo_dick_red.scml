@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="dick">
+        <file id="0" name="dick/dick-0.png" width="72" height="48" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="dildo_dick_red">
+        <obj_info name="dildo_dick_dick-0" realname="dick-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="DoYouWannaLickMyDick" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="dick-0" folder="0" file="0" abs_x="-36.471507" abs_y="45.601023" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="dick-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-0.006459" y="9.576927" pivot_x="0.506459" pivot_y="0.249498" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="dick-0" folder="0" file="0" abs_x="27.613029" abs_y="40.065857" abs_angle="275.615978" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="dick-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-4.669671" y="0.250502" pivot_x="0.506459" pivot_y="0.249498" angle="275.615978" scale_x="1" scale_y="1"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="backpack">
+        <file id="0" name="backpack/backpack-0.png" width="39" height="56" pivot_x="0.403846" pivot_y="0.566071"/>
+        <file id="1" name="backpack/backpack-1.png" width="46" height="69" pivot_x="0.574871" pivot_y="0.549028"/>
+    </folder>
+    <folder id="1" name="swap_body">
+        <file id="0" name="swap_body/swap_body-0.png" width="124" height="103" pivot_x="0.516225" pivot_y="0.0484633"/>
+        <file id="1" name="swap_body/swap_body-1.png" width="108" height="95" pivot_x="0.563521" pivot_y="-0.00857106"/>
+        <file id="2" name="swap_body/swap_body-2.png" width="129" height="102" pivot_x="0.448371" pivot_y="0.0279542"/>
+        <file id="3" name="swap_body/swap_body-3.png" width="92" height="128" pivot_x="0.475543" pivot_y="0.173438"/>
+        <file id="4" name="swap_body/swap_body-4.png" width="71" height="80" pivot_x="0.441148" pivot_y="-0.187431"/>
+        <file id="5" name="swap_body/swap_body-5.png" width="51" height="73" pivot_x="0.855163" pivot_y="-0.281462"/>
+        <file id="6" name="swap_body/swap_body-6.png" width="120" height="136" pivot_x="0.519792" pivot_y="0.100919"/>
+        <file id="7" name="swap_body/swap_body-7.png" width="144" height="145" pivot_x="0.607796" pivot_y="0.1146"/>
+        <file id="8" name="swap_body/swap_body-8.png" width="159" height="156" pivot_x="0.455346" pivot_y="0.154856"/>
+        <file id="9" name="swap_body/swap_body-9.png" width="120" height="136" pivot_x="0.527708" pivot_y="0.100919"/>
+        <file id="10" name="swap_body/swap_body-10.png" width="101" height="147" pivot_x="1.01658" pivot_y="0.0404762"/>
+        <file id="11" name="swap_body/swap_body-13.png" width="194" height="235" pivot_x="0.493041" pivot_y="0.167038"/>
+    </folder>
+    <entity id="0" name="chaintits">
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="swap_body-2">
+                <key id="0" spin="0">
+                    <object folder="1" file="2" x="-4.081402" y="-37.555556" scale_x="1.384025" scale_y="0.87728"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

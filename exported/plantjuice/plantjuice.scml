@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="box">
+        <file id="0" name="box/box-0.png" width="91" height="154" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="plantjuice">
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="box-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="2.001152" y="18.488764" pivot_x="0.472826" pivot_y="0.267742"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

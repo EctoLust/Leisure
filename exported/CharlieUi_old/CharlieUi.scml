@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="Body">
+        <file id="0" name="Body/Body-0.png" width="429" height="749" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="1" name="Head">
+        <file id="0" name="Head/Head-0.png" width="722" height="683" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="2" name="Face">
+        <file id="0" name="Face/Face-0.png" width="536" height="428" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="3" name="Tits">
+        <file id="0" name="Tits/Tits-0.png" width="402" height="322" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="4" name="ArmL">
+        <file id="0" name="ArmL/ArmL-0.png" width="197" height="471" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="5" name="ArmLLow">
+        <file id="0" name="ArmLLow/ArmLLow-0.png" width="294" height="117" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="6" name="ArmR">
+        <file id="0" name="ArmR/ArmR-0.png" width="268" height="447" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="7" name="ArmRLow">
+        <file id="0" name="ArmRLow/ArmRLow-0.png" width="380" height="246" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="8" name="Rose">
+        <file id="0" name="Rose/Rose-0.png" width="237" height="245" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="9" name="TitR">
+        <file id="0" name="TitR/TitR-0.png" width="183" height="244" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="10" name="TitL">
+        <file id="0" name="TitL/TitL-0.png" width="186" height="231" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="CharlieUi">
+        <obj_info name="CharlieUi_Body-0" realname="Body-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_Head-0" realname="Head-0" type="sprite">
+            <frames>
+                <i folder="1" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_Face-0" realname="Face-0" type="sprite">
+            <frames>
+                <i folder="2" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_ArmL-0" realname="ArmL-0" type="sprite">
+            <frames>
+                <i folder="4" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_ArmLLow-0" realname="ArmLLow-0" type="sprite">
+            <frames>
+                <i folder="5" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_ArmR-0" realname="ArmR-0" type="sprite">
+            <frames>
+                <i folder="6" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_ArmRLow-0" realname="ArmRLow-0" type="sprite">
+            <frames>
+                <i folder="7" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_Rose-0" realname="Rose-0" type="sprite">
+            <frames>
+                <i folder="8" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_TitR-0" realname="TitR-0" type="sprite">
+            <frames>
+                <i folder="9" file="0"/>
+            </frames>
+        </obj_info>
+        <obj_info name="CharlieUi_TitL-0" realname="TitL-0" type="sprite">
+            <frames>
+                <i folder="10" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="Idle" length="1500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="ArmR-0" folder="6" file="0" abs_x="-273.809534" abs_y="514.285533" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="0" z_index="0"/>
+                    <object_ref id="1" name="ArmLLow-0" folder="5" file="0" abs_x="45.512714" abs_y="85.164873" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="0" z_index="1"/>
+                    <object_ref id="2" name="ArmL-0" folder="4" file="0" abs_x="140.384614" abs_y="461.538685" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="0" z_index="2"/>
+                    <object_ref id="3" name="Body-0" folder="0" file="0" abs_x="-184.222299" abs_y="725.777528" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="3"/>
+                    <object_ref id="4" name="Head-0" folder="1" file="0" abs_x="-283.673322" abs_y="1177.551224" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="0" z_index="4"/>
+                    <object_ref id="5" name="Face-0" folder="2" file="0" abs_x="-222.449094" abs_y="917.285651" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="0" z_index="5"/>
+                    <object_ref id="6" name="ArmRLow-0" folder="7" file="0" abs_x="-325.000002" abs_y="257.142833" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="6" key="0" z_index="6"/>
+                    <object_ref id="7" name="Rose-0" folder="8" file="0" abs_x="-260.399746" abs_y="1143.597663" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="7" key="0" z_index="7"/>
+                    <object_ref id="8" name="TitR-0" folder="9" file="0" abs_x="-197.30432" abs_y="481.035563" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="8" key="0" z_index="8"/>
+                    <object_ref id="9" name="TitL-0" folder="10" file="0" abs_x="-15.285772" abs_y="408.714192" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="9" key="0" z_index="9"/>
+                </key>
+                <key id="1" time="749">
+                    <object_ref id="0" timeline="5" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="3" key="1" z_index="2"/>
+                    <object_ref id="3" timeline="0" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="1" key="1" z_index="4"/>
+                    <object_ref id="5" timeline="2" key="1" z_index="5"/>
+                    <object_ref id="6" timeline="6" key="1" z_index="6"/>
+                    <object_ref id="7" timeline="7" key="1" z_index="7"/>
+                    <object_ref id="8" timeline="8" key="1" z_index="8"/>
+                    <object_ref id="9" timeline="9" key="1" z_index="9"/>
+                </key>
+                <key id="2" time="1500">
+                    <object_ref id="0" timeline="5" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="3" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="0" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="1" key="2" z_index="4"/>
+                    <object_ref id="5" timeline="2" key="2" z_index="5"/>
+                    <object_ref id="6" timeline="6" key="2" z_index="6"/>
+                    <object_ref id="7" timeline="7" key="2" z_index="7"/>
+                    <object_ref id="8" timeline="8" key="2" z_index="8"/>
+                    <object_ref id="9" timeline="9" key="2" z_index="9"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="Body-0">
+                <key id="0" spin="-1">
+                    <object folder="0" file="0" x="-13.786176" y="118.089111" pivot_x="0.397287" pivot_y="0.188667" angle="0"/>
+                </key>
+                <key id="1" time="749">
+                    <object folder="0" file="0" x="-11.779671" y="116.425184" pivot_x="0.397287" pivot_y="0.188667" angle="359.976125"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="0" file="0" x="-13.786176" y="118.089111" pivot_x="0.397287" pivot_y="0.188667" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="1" obj="1" name="Head-0">
+                <key id="0">
+                    <object folder="1" file="0" x="10.29692" y="704.27457" pivot_x="0.407161" pivot_y="0.307062" angle="0"/>
+                </key>
+                <key id="1" time="749" spin="-1">
+                    <object folder="1" file="0" x="13.547688" y="699.600557" pivot_x="0.407161" pivot_y="0.307062" angle="2.23765" scale_x="1" scale_y="1"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="1" file="0" x="10.29692" y="704.27457" pivot_x="0.407161" pivot_y="0.307062" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="2" obj="2" name="Face-0">
+                <key id="0">
+                    <object folder="2" file="0" x="-16.211302" y="700.964607" pivot_x="0.384772" pivot_y="0.494577" angle="0"/>
+                </key>
+                <key id="1" time="749" spin="-1">
+                    <object folder="2" file="0" x="-12.811086" y="695.258119" pivot_x="0.384772" pivot_y="0.494577" angle="2.23765" scale_x="1" scale_y="1"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="2" file="0" x="-16.211302" y="700.964607" pivot_x="0.384772" pivot_y="0.494577" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="3" obj="3" name="ArmL-0">
+                <key id="0" spin="-1">
+                    <object folder="4" file="0" x="188.7162" y="411.145453" pivot_x="0.245338" pivot_y="0.893008" angle="0"/>
+                </key>
+                <key id="1" time="749">
+                    <object folder="4" file="0" x="191.957276" y="410.01574" pivot_x="0.245338" pivot_y="0.893008" angle="357.501061"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="4" file="0" x="188.7162" y="411.145453" pivot_x="0.245338" pivot_y="0.893008" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="4" obj="4" name="ArmLLow-0">
+                <key id="0" spin="-1">
+                    <object folder="5" file="0" x="293.24711" y="23.652123" pivot_x="0.842634" pivot_y="0.47425" angle="0"/>
+                </key>
+                <key id="1" time="749">
+                    <object folder="5" file="0" x="279.493725" y="18.333264" pivot_x="0.842634" pivot_y="0.47425" angle="357.501061"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="5" file="0" x="293.24711" y="23.652123" pivot_x="0.842634" pivot_y="0.47425" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="5" obj="5" name="ArmR-0">
+                <key id="0">
+                    <object folder="6" file="0" x="-49.147814" y="455.583705" pivot_x="0.83829" pivot_y="0.868676" angle="0"/>
+                </key>
+                <key id="1" time="749" spin="-1">
+                    <object folder="6" file="0" x="-47.000671" y="453.934484" pivot_x="0.83829" pivot_y="0.868676" angle="0.356284"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="6" file="0" x="-49.147814" y="455.583705" pivot_x="0.83829" pivot_y="0.868676" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="6" obj="6" name="ArmRLow-0">
+                <key id="0" spin="-1">
+                    <object folder="7" file="0" x="-241.386702" y="122.665703" pivot_x="0.220035" pivot_y="0.453345" angle="0"/>
+                </key>
+                <key id="1" time="749">
+                    <object folder="7" file="0" x="-239.37827" y="121.096617" pivot_x="0.220035" pivot_y="0.453345" angle="359.349712"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="7" file="0" x="-241.386702" y="122.665703" pivot_x="0.220035" pivot_y="0.453345" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="7" obj="7" name="Rose-0">
+                <key id="0">
+                    <object folder="8" file="0" x="-131.176681" y="970.632808" pivot_x="0.545245" pivot_y="0.294021" angle="0"/>
+                </key>
+                <key id="1" time="749" spin="-1">
+                    <object folder="8" file="0" x="-138.217841" y="960.231934" pivot_x="0.545245" pivot_y="0.294021" angle="2.23765" scale_x="1" scale_y="1"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="8" file="0" x="-131.176681" y="970.632808" pivot_x="0.545245" pivot_y="0.294021" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="8" obj="8" name="TitR-0">
+                <key id="0">
+                    <object folder="9" file="0" x="-42.096896" y="431.532111" pivot_x="0.848128" pivot_y="0.797117" angle="0"/>
+                </key>
+                <key id="1" time="749" spin="-1">
+                    <object folder="9" file="0" x="-38.287611" y="428.943185" pivot_x="0.848128" pivot_y="0.797117" angle="1.369194"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="9" file="0" x="-42.096896" y="431.532111" pivot_x="0.848128" pivot_y="0.797117" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="9" obj="9" name="TitL-0">
+                <key id="0">
+                    <object folder="10" file="0" x="75.203972" y="345.393165" pivot_x="0.486504" pivot_y="0.725883" angle="0"/>
+                </key>
+                <key id="1" time="749" spin="-1">
+                    <object folder="10" file="0" x="77.203972" y="342.393165" pivot_x="0.486504" pivot_y="0.725883" angle="5.847766" scale_x="1" scale_y="1"/>
+                </key>
+                <key id="2" time="1500" spin="0">
+                    <object folder="10" file="0" x="75.203972" y="345.393165" pivot_x="0.486504" pivot_y="0.725883" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

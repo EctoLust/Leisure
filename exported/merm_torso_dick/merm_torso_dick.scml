@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="pig_torso">
+		<file id="0" name="pig_torso/pig_torso-0.png" width="256" height="388" pivot_x="0.513477" pivot_y="0.240399" />
+		<file id="1" name="pig_torso/pig_torso-1.png" width="252" height="396" pivot_x="0.488393" pivot_y="0.231439" />
+		<file id="2" name="pig_torso/pig_torso-2.png" width="244" height="392" pivot_x="0.507172" pivot_y="0.223533" />
+		<file id="3" name="pig_torso/pig_torso-3.png" width="252" height="396" pivot_x="0.488393" pivot_y="0.231439" />
+		<file id="4" name="pig_torso/pig_torso-4.png" width="212" height="408" pivot_x="0.510967" pivot_y="0.238542" />
+		<file id="5" name="pig_torso/pig_torso-5.png" width="256" height="372" pivot_x="0.493945" pivot_y="0.264449" />
+    </folder>
+    <entity id="0" name="merm_torso_dick">
+        <obj_info name="pigman_torso_dick_pig_torso-0" realname="pig_torso-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="NewAnimation" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="pig_torso-0" folder="0" file="0" abs_x="-117.824964" abs_y="369.625" abs_angle="360" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="pig_torso-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="21" y="94"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

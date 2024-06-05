@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="headbase">
+        <file id="0" name="headbase/headbase-0.png" width="208" height="220" pivot_x="0.552882" pivot_y="0.14557"/>
+        <file id="1" name="headbase/headbase-1.png" width="212" height="204" pivot_x="0.66745" pivot_y="0.122184"/>
+        <file id="2" name="headbase/headbase-2.png" width="208" height="212" pivot_x="0.55805" pivot_y="0.107078"/>
+        <file id="3" name="headbase/headbase-3.png" width="208" height="220" pivot_x="0.552882" pivot_y="0.14557"/>
+    </folder>
+    <folder id="1" name="hairpigtails">
+        <file id="0" name="hairpigtails/hairpigtails-0.png" width="160" height="176" pivot_x="0.687809" pivot_y="0.826707"/>
+        <file id="1" name="hairpigtails/hairpigtails-1.png" width="156" height="180" pivot_x="0.374997" pivot_y="0.758475"/>
+        <file id="2" name="hairpigtails/hairpigtails-2.png" width="152" height="184" pivot_x="0.894734" pivot_y="0.680845"/>
+        <file id="3" name="hairpigtails/hairpigtails-3.png" width="156" height="176" pivot_x="0.691984" pivot_y="0.82898"/>
+        <file id="4" name="hairpigtails/hairpigtails-4.png" width="156" height="180" pivot_x="0.374997" pivot_y="0.758475"/>
+    </folder>
+    <folder id="2" name="face">
+        <file id="0" name="face/face-0.png" width="132" height="96" pivot_x="0.530867" pivot_y="0.607557"/>
+        <file id="1" name="face/face-1.png" width="136" height="88" pivot_x="0.545952" pivot_y="0.672733"/>
+        <file id="2" name="face/face-2.png" width="140" height="72" pivot_x="0.549104" pivot_y="0.823965"/>
+        <file id="3" name="face/face-3.png" width="132" height="84" pivot_x="0.534087" pivot_y="0.711315"/>
+        <file id="4" name="face/face-4.png" width="80" height="96" pivot_x="0.817806" pivot_y="0.621359"/>
+        <file id="5" name="face/face-5.png" width="84" height="88" pivot_x="0.829756" pivot_y="0.687222"/>
+        <file id="6" name="face/face-6.png" width="88" height="72" pivot_x="0.821869" pivot_y="0.831951"/>
+        <file id="7" name="face/face-7.png" width="84" height="80" pivot_x="0.821125" pivot_y="0.744069"/>
+        <file id="8" name="face/face-8.png" width="132" height="96" pivot_x="0.530867" pivot_y="0.607557"/>
+        <file id="9" name="face/face-9.png" width="132" height="104" pivot_x="0.530867" pivot_y="0.637505"/>
+        <file id="10" name="face/face-10.png" width="132" height="108" pivot_x="0.530867" pivot_y="0.648847"/>
+        <file id="11" name="face/face-11.png" width="128" height="80" pivot_x="0.539645" pivot_y="0.740944"/>
+        <file id="12" name="face/face-12.png" width="128" height="100" pivot_x="0.539645" pivot_y="0.670505"/>
+        <file id="13" name="face/face-13.png" width="136" height="100" pivot_x="0.537129" pivot_y="0.700255"/>
+        <file id="14" name="face/face-14.png" width="92" height="40" pivot_x="0.586951" pivot_y="0.547513"/>
+        <file id="15" name="face/face-15.png" width="132" height="108" pivot_x="0.530867" pivot_y="0.621995"/>
+        <file id="16" name="face/face-16.png" width="132" height="100" pivot_x="0.530867" pivot_y="0.616505"/>
+        <file id="17" name="face/face-17.png" width="128" height="80" pivot_x="0.539645" pivot_y="0.773444"/>
+        <file id="18" name="face/face-18.png" width="128" height="84" pivot_x="0.539645" pivot_y="0.770839"/>
+        <file id="19" name="face/face-19.png" width="132" height="96" pivot_x="0.530867" pivot_y="0.605474"/>
+        <file id="20" name="face/face-20.png" width="144" height="80" pivot_x="0.519788" pivot_y="0.769381"/>
+        <file id="21" name="face/face-21.png" width="140" height="92" pivot_x="0.534282" pivot_y="0.762505"/>
+        <file id="22" name="face/face-22.png" width="144" height="80" pivot_x="0.519788" pivot_y="0.772819"/>
+        <file id="23" name="face/face-23.png" width="124" height="104" pivot_x="0.458665" pivot_y="0.662986"/>
+        <file id="24" name="face/face-24.png" width="132" height="100" pivot_x="0.530867" pivot_y="0.616505"/>
+        <file id="25" name="face/face-25.png" width="140" height="100" pivot_x="0.543032" pivot_y="0.941"/>
+        <file id="26" name="face/face-26.png" width="140" height="96" pivot_x="0.543032" pivot_y="0.912245"/>
+        <file id="27" name="face/face-27.png" width="140" height="76" pivot_x="0.543032" pivot_y="0.901651"/>
+        <file id="28" name="face/face-28.png" width="132" height="96" pivot_x="0.531436" pivot_y="0.603911"/>
+        <file id="29" name="face/face-29.png" width="140" height="76" pivot_x="0.540354" pivot_y="0.886191"/>
+        <file id="30" name="face/face-30.png" width="132" height="100" pivot_x="0.531436" pivot_y="0.610755"/>
+        <file id="31" name="face/face-31.png" width="128" height="96" pivot_x="0.539645" pivot_y="0.65287"/>
+        <file id="32" name="face/face-32.png" width="140" height="92" pivot_x="0.543032" pivot_y="0.943207"/>
+    </folder>
+    <entity id="0" name="droppedmask">
+        <animation id="0" name="head" length="100" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="3" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="2" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="0" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="1" key="0" z_index="3"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="headbase-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-45" y="-42" angle="316.701355" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="face-0">
+                <key id="0" spin="0">
+                    <object folder="2" file="18" x="6" y="-0.428571" angle="310.3141"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="hairpigtails-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="-68" y="12" angle="306.714203" scale_y="1"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="hairpigtails-2">
+                <key id="0" spin="0">
+                    <object folder="1" file="2" x="10" y="-52" angle="32.619243" scale_x="1" scale_y="1"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

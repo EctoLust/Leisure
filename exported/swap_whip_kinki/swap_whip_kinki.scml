@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="whipline">
+        <file id="0" name="whipline/whipline-0.png" width="36" height="160" pivot_x="0.738194" pivot_y="0.0871875"/>
+        <file id="1" name="whipline/whipline-1.png" width="52" height="368" pivot_x="0.262981" pivot_y="0.951087"/>
+        <file id="2" name="whipline/whipline-2.png" width="28" height="148" pivot_x="0.607143" pivot_y="0.0726351"/>
+        <file id="3" name="whipline/whipline-3.png" width="156" height="160" pivot_x="0.0738782" pivot_y="0.0675"/>
+        <file id="4" name="whipline/whipline-4.png" width="268" height="120" pivot_x="0.196735" pivot_y="0.0789583"/>
+        <file id="5" name="whipline/whipline-5.png" width="112" height="292" pivot_x="0.187946" pivot_y="0.405736"/>
+        <file id="6" name="whipline/whipline-6.png" width="92" height="136" pivot_x="0.749185" pivot_y="0.3"/>
+        <file id="7" name="whipline/whipline-7.png" width="96" height="88" pivot_x="0.832813" pivot_y="0.271023"/>
+    </folder>
+    <folder id="1" name="swap_whip">
+        <file id="0" name="swap_whip/swap_whip-0.png" width="44" height="252" pivot_x="0.379545" pivot_y="0.261706"/>
+        <file id="1" name="swap_whip/swap_whip-1.png" width="120" height="348" pivot_x="0.144583" pivot_y="0.187428"/>
+        <file id="2" name="swap_whip/swap_whip-2.png" width="56" height="244" pivot_x="0.434821" pivot_y="0.223053"/>
+        <file id="3" name="swap_whip/swap_whip-3.png" width="184" height="172" pivot_x="0.886821" pivot_y="0.322674"/>
+        <file id="4" name="swap_whip/swap_whip-4.png" width="116" height="220" pivot_x="0.729741" pivot_y="0.255682"/>
+        <file id="5" name="swap_whip/swap_whip-5.png" width="176" height="188" pivot_x="0.83054" pivot_y="0.239096"/>
+        <file id="6" name="swap_whip/swap_whip-6.png" width="184" height="164" pivot_x="0.125815" pivot_y="0.268598"/>
+        <file id="7" name="swap_whip/swap_whip-7.png" width="152" height="200" pivot_x="0.188816" pivot_y="0.272375"/>
+        <file id="8" name="swap_whip/swap_whip-8.png" width="116" height="352" pivot_x="0.157759" pivot_y="0.189418"/>
+    </folder>
+    <entity id="0" name="swap_whip_kinki">
+        <obj_info name="swap_whip_kinki_whipline" realname="whipline" type="sprite">
+            <frames>
+                <i folder="0" file="6"/>
+                <i folder="0" file="4"/>
+                <i folder="0" file="3"/>
+                <i folder="0" file="5"/>
+                <i folder="0" file="1"/>
+                <i folder="0" file="7"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="whip_down" length="600" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="whipline" folder="0" file="6" abs_x="-129.616161" abs_y="517.844177" abs_angle="324.026" abs_scale_x="2.50844" abs_scale_y="2.12714" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="234">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="267">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="300">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="334">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="367">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="400">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="434">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="467">
+                    <object_ref id="0" timeline="0" key="14" z_index="0"/>
+                </key>
+                <key id="15" time="500">
+                    <object_ref id="0" timeline="0" key="15" z_index="0"/>
+                </key>
+                <key id="16" time="534"/>
+                <key id="17" time="567"/>
+                <key id="18" time="600"/>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0">
+                    <object folder="0" file="6" x="-108.65" y="252.4" angle="324.026" scale_x="2.50844" scale_y="2.12714"/>
+                </key>
+                <key id="1" time="34" spin="-1">
+                    <object folder="0" file="6" x="-12.3" y="326.4" angle="42.389" scale_x="2.44244" scale_y="2.2482"/>
+                </key>
+                <key id="2" time="67" spin="-1">
+                    <object folder="0" file="4" x="232.15" y="152.35" angle="348.744" scale_x="-1.81001" scale_y="2.67491"/>
+                </key>
+                <key id="3" time="100" spin="-1">
+                    <object folder="0" file="3" x="108.95" y="-145.4" angle="309.315" scale_x="-3.07101" scale_y="2.97537"/>
+                </key>
+                <key id="4" time="134" spin="-1">
+                    <object folder="0" file="4" x="-68.5" y="-117.85" angle="238.358" scale_x="-2.10163" scale_y="2.93453"/>
+                </key>
+                <key id="5" time="167" spin="-1">
+                    <object folder="0" file="5" x="-139.8" y="29.6" angle="226.279" scale_x="1.69196" scale_y="2.05163"/>
+                </key>
+                <key id="6" time="200">
+                    <object folder="0" file="6" x="-141.1" y="11.45" angle="128.168" scale_x="-2.83585" scale_y="2.18896"/>
+                </key>
+                <key id="7" time="234">
+                    <object folder="0" file="1" x="-107.35" y="-47.45" angle="239.049" scale_x="-3.92051" scale_y="0.848881"/>
+                </key>
+                <key id="8" time="267">
+                    <object folder="0" file="1" x="-24.1" y="-106.05" angle="253.167" scale_x="-3.53498" scale_y="0.945263"/>
+                </key>
+                <key id="9" time="300" spin="-1">
+                    <object folder="0" file="1" x="188.8" y="-80.1" angle="283.955" scale_x="-2.74799" scale_y="1.15774"/>
+                </key>
+                <key id="10" time="334">
+                    <object folder="0" file="4" x="264.1" y="-5.15" angle="160.532" scale_x="1.84803" scale_y="1.31969"/>
+                </key>
+                <key id="11" time="367">
+                    <object folder="0" file="4" x="297" y="65.6" angle="173.146" scale_x="1.74091" scale_y="1.49406"/>
+                </key>
+                <key id="12" time="400">
+                    <object folder="0" file="4" x="298.95" y="90.1" angle="186.218" scale_x="1.58956" scale_y="1.40096"/>
+                </key>
+                <key id="13" time="434">
+                    <object folder="0" file="4" x="250.6" y="141.9" angle="218.876" scale_x="1.48383" scale_y="1.50327"/>
+                </key>
+                <key id="14" time="467">
+                    <object folder="0" file="4" x="192.9" y="234.6" angle="252.681" scale_x="1.25261" scale_y="1.40983"/>
+                </key>
+                <key id="15" time="500">
+                    <object folder="0" file="4" x="153" y="254.55" angle="268.452" scale_x="1.03259" scale_y="1.0359"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="whip_lag_down" length="500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="whipline" folder="0" file="4" abs_x="281.299253" abs_y="403.324565" abs_angle="245.302" abs_scale_x="1.367" abs_scale_y="1.62311" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="234">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="267">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="300">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="334">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="367">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="400">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="434">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="467">
+                    <object_ref id="0" timeline="0" key="14" z_index="0"/>
+                </key>
+                <key id="15" time="500">
+                    <object_ref id="0" timeline="0" key="15" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0">
+                    <object folder="0" file="4" x="88.2" y="412.8" angle="245.302" scale_x="1.367" scale_y="1.62311"/>
+                </key>
+                <key id="1" time="34">
+                    <object folder="0" file="4" x="83.6" y="413.2" angle="247.448" scale_x="1.38215" scale_y="1.60934"/>
+                </key>
+                <key id="2" time="67">
+                    <object folder="0" file="4" x="79.05" y="413.65" angle="249.595" scale_x="1.39736" scale_y="1.59564"/>
+                </key>
+                <key id="3" time="100">
+                    <object folder="0" file="4" x="74.45" y="414" angle="251.836" scale_x="1.4125" scale_y="1.58195"/>
+                </key>
+                <key id="4" time="134">
+                    <object folder="0" file="4" x="69.9" y="414.45" angle="254.077" scale_x="1.42773" scale_y="1.56829"/>
+                </key>
+                <key id="5" time="167">
+                    <object folder="0" file="4" x="65.4" y="414.8" angle="256.224" scale_x="1.44293" scale_y="1.55465"/>
+                </key>
+                <key id="6" time="200">
+                    <object folder="0" file="4" x="60.75" y="415.25" angle="258.465" scale_x="1.45809" scale_y="1.54103"/>
+                </key>
+                <key id="7" time="234">
+                    <object folder="0" file="4" x="56.2" y="415.7" angle="260.612" scale_x="1.47328" scale_y="1.52743"/>
+                </key>
+                <key id="8" time="267">
+                    <object folder="0" file="4" x="51.6" y="416.1" angle="262.758" scale_x="1.48847" scale_y="1.51381"/>
+                </key>
+                <key id="9" time="300">
+                    <object folder="0" file="4" x="47.1" y="416.5" angle="265.092" scale_x="1.50365" scale_y="1.50024"/>
+                </key>
+                <key id="10" time="334">
+                    <object folder="0" file="4" x="42.55" y="416.9" angle="267.239" scale_x="1.51885" scale_y="1.4867"/>
+                </key>
+                <key id="11" time="367">
+                    <object folder="0" file="4" x="38" y="417.3" angle="269.386" scale_x="1.53402" scale_y="1.47316"/>
+                </key>
+                <key id="12" time="400">
+                    <object folder="0" file="4" x="33.45" y="417.7" angle="271.625" scale_x="1.54922" scale_y="1.45963"/>
+                </key>
+                <key id="13" time="434">
+                    <object folder="0" file="4" x="28.9" y="418.15" angle="273.865" scale_x="1.56443" scale_y="1.44614"/>
+                </key>
+                <key id="14" time="467" spin="0">
+                    <object folder="0" file="4" x="24.75" y="419.5" angle="276.001" scale_x="1.5815" scale_y="1.43351"/>
+                </key>
+                <key id="15" time="500" spin="-1">
+                    <object folder="0" file="4" x="24.75" y="419.5" angle="276.001" scale_x="1.5815" scale_y="1.43351"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="2" name="whip_lag_side" length="500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="whipline" folder="0" file="7" abs_x="-422.076141" abs_y="31.037761" abs_angle="54.0378" abs_scale_x="1.32968" abs_scale_y="2.56911" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="234">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="267">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="300">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="334">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="367">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="400">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="434">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="467">
+                    <object_ref id="0" timeline="0" key="14" z_index="0"/>
+                </key>
+                <key id="15" time="500">
+                    <object_ref id="0" timeline="0" key="15" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0">
+                    <object folder="0" file="7" x="-226.25" y="20.3" angle="54.0378" scale_x="1.32968" scale_y="2.56911"/>
+                </key>
+                <key id="1" time="34">
+                    <object folder="0" file="7" x="-226.3" y="20.3" angle="54.0425" scale_x="1.33047" scale_y="2.5691"/>
+                </key>
+                <key id="2" time="67">
+                    <object folder="0" file="7" x="-226.2" y="20.2" angle="54.1434" scale_x="1.33174" scale_y="2.56903"/>
+                </key>
+                <key id="3" time="100">
+                    <object folder="0" file="7" x="-226.2" y="20.15" angle="54.1556" scale_x="1.33356" scale_y="2.56899"/>
+                </key>
+                <key id="4" time="134">
+                    <object folder="0" file="7" x="-226.15" y="20.15" angle="54.1707" scale_x="1.33588" scale_y="2.56887"/>
+                </key>
+                <key id="5" time="167">
+                    <object folder="0" file="7" x="-226.1" y="20" angle="54.2826" scale_x="1.33872" scale_y="2.56877"/>
+                </key>
+                <key id="6" time="200">
+                    <object folder="0" file="7" x="-226.15" y="19.9" angle="54.3982" scale_x="1.3421" scale_y="2.56864"/>
+                </key>
+                <key id="7" time="234">
+                    <object folder="0" file="7" x="-226.05" y="19.75" angle="54.4228" scale_x="1.346" scale_y="2.56853"/>
+                </key>
+                <key id="8" time="267">
+                    <object folder="0" file="7" x="-226" y="19.65" angle="54.5456" scale_x="1.3504" scale_y="2.56837"/>
+                </key>
+                <key id="9" time="300">
+                    <object folder="0" file="7" x="-225.9" y="19.45" angle="54.671" scale_x="1.35532" scale_y="2.5682"/>
+                </key>
+                <key id="10" time="334">
+                    <object folder="0" file="7" x="-225.8" y="19.3" angle="54.8" scale_x="1.36076" scale_y="2.568"/>
+                </key>
+                <key id="11" time="367">
+                    <object folder="0" file="7" x="-225.65" y="19.05" angle="55.0261" scale_x="1.36671" scale_y="2.56778"/>
+                </key>
+                <key id="12" time="400">
+                    <object folder="0" file="7" x="-225.55" y="18.9" angle="55.162" scale_x="1.37319" scale_y="2.56756"/>
+                </key>
+                <key id="13" time="434">
+                    <object folder="0" file="7" x="-225.45" y="18.6" angle="55.3013" scale_x="1.38019" scale_y="2.56734"/>
+                </key>
+                <key id="14" time="467" spin="0">
+                    <object folder="0" file="7" x="-225.35" y="18.35" angle="55.547" scale_x="1.38988" scale_y="2.56912"/>
+                </key>
+                <key id="15" time="500" spin="-1">
+                    <object folder="0" file="7" x="-225.35" y="18.35" angle="55.547" scale_x="1.38988" scale_y="2.56912"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="3" name="whip_lag_up" length="500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="whipline" folder="0" file="4" abs_x="233.358563" abs_y="419.876522" abs_angle="247.797" abs_scale_x="1.49072" abs_scale_y="1.09164" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="234">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="267">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="300">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="334">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="367">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="400">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="434">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="467">
+                    <object_ref id="0" timeline="0" key="14" z_index="0"/>
+                </key>
+                <key id="15" time="500">
+                    <object_ref id="0" timeline="0" key="15" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0" spin="-1">
+                    <object folder="0" file="4" x="91.95" y="392.7" angle="247.797" scale_x="1.49072" scale_y="1.09164"/>
+                </key>
+                <key id="1" time="34">
+                    <object folder="0" file="4" x="92.95" y="394.2" angle="247.714" scale_x="1.49225" scale_y="1.10921"/>
+                </key>
+                <key id="2" time="67">
+                    <object folder="0" file="4" x="94.05" y="395.7" angle="247.818" scale_x="1.49372" scale_y="1.12677"/>
+                </key>
+                <key id="3" time="100">
+                    <object folder="0" file="4" x="95.1" y="397.15" angle="247.924" scale_x="1.49527" scale_y="1.14435"/>
+                </key>
+                <key id="4" time="134">
+                    <object folder="0" file="4" x="96.2" y="398.65" angle="247.935" scale_x="1.49678" scale_y="1.1619"/>
+                </key>
+                <key id="5" time="167">
+                    <object folder="0" file="4" x="97.25" y="400.15" angle="247.947" scale_x="1.49827" scale_y="1.17946"/>
+                </key>
+                <key id="6" time="200">
+                    <object folder="0" file="4" x="98.25" y="401.7" angle="247.958" scale_x="1.49977" scale_y="1.19705"/>
+                </key>
+                <key id="7" time="234">
+                    <object folder="0" file="4" x="99.4" y="403.1" angle="248.063" scale_x="1.5013" scale_y="1.21459"/>
+                </key>
+                <key id="8" time="267">
+                    <object folder="0" file="4" x="100.45" y="404.6" angle="248.168" scale_x="1.50282" scale_y="1.23217"/>
+                </key>
+                <key id="9" time="300">
+                    <object folder="0" file="4" x="101.45" y="406.1" angle="248.179" scale_x="1.50432" scale_y="1.24971"/>
+                </key>
+                <key id="10" time="334">
+                    <object folder="0" file="4" x="102.55" y="407.6" angle="248.19" scale_x="1.50584" scale_y="1.26729"/>
+                </key>
+                <key id="11" time="367">
+                    <object folder="0" file="4" x="103.6" y="409.1" angle="248.202" scale_x="1.50737" scale_y="1.28487"/>
+                </key>
+                <key id="12" time="400">
+                    <object folder="0" file="4" x="104.7" y="410.55" angle="248.306" scale_x="1.5089" scale_y="1.30242"/>
+                </key>
+                <key id="13" time="434">
+                    <object folder="0" file="4" x="105.75" y="412.1" angle="248.318" scale_x="1.51037" scale_y="1.32"/>
+                </key>
+                <key id="14" time="467" spin="0">
+                    <object folder="0" file="4" x="106.9" y="413.75" angle="248.326" scale_x="1.51266" scale_y="1.33966"/>
+                </key>
+                <key id="15" time="500" spin="-1">
+                    <object folder="0" file="4" x="106.9" y="413.75" angle="248.326" scale_x="1.51266" scale_y="1.33966"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="4" name="whip_pre_down" length="200" interval="100">
+            <mainline>
+                <key id="0"/>
+                <key id="1" time="34"/>
+                <key id="2" time="67"/>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0" time="100">
+                    <object folder="0" file="4" x="164.95" y="345.45" angle="218.613" scale_x="1.01605" scale_y="1.52549"/>
+                </key>
+                <key id="1" time="134">
+                    <object folder="0" file="4" x="121.8" y="389.3" angle="232.235" scale_x="1.26781" scale_y="1.63192"/>
+                </key>
+                <key id="2" time="167" spin="0">
+                    <object folder="0" file="4" x="92.7" y="412.4" angle="243.115" scale_x="1.35174" scale_y="1.63949"/>
+                </key>
+                <key id="3" time="200" spin="-1">
+                    <object folder="0" file="4" x="92.7" y="412.4" angle="243.115" scale_x="1.35174" scale_y="1.63949"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="5" name="whip_pre_side" length="200" interval="100">
+            <mainline>
+                <key id="0"/>
+                <key id="1" time="34"/>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0" time="67">
+                    <object folder="0" file="3" x="-33.8" y="313.6" angle="260.079" scale_x="1.36013" scale_y="2.16102"/>
+                </key>
+                <key id="1" time="100">
+                    <object folder="0" file="6" x="-154.5" y="222.35" angle="306.886" scale_x="2.10451" scale_y="3.32505"/>
+                </key>
+                <key id="2" time="134">
+                    <object folder="0" file="5" x="-228.7" y="98.65" angle="24.6151" scale_x="-1.45957" scale_y="0.958162"/>
+                </key>
+                <key id="3" time="167" spin="0">
+                    <object folder="0" file="7" x="-226.25" y="20.3" angle="54.0571" scale_x="1.33143" scale_y="2.57119"/>
+                </key>
+                <key id="4" time="200" spin="-1">
+                    <object folder="0" file="7" x="-226.25" y="20.3" angle="54.0571" scale_x="1.33143" scale_y="2.57119"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="6" name="whip_pre_up" length="200" interval="100">
+            <mainline>
+                <key id="0"/>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0" time="34">
+                    <object folder="0" file="5" x="-128.85" y="282.25" angle="190.566" scale_x="1.01419" scale_y="0.956523"/>
+                </key>
+                <key id="1" time="67">
+                    <object folder="0" file="5" x="-118.25" y="368.25" angle="202.657" scale_x="1.21595" scale_y="0.972025"/>
+                </key>
+                <key id="2" time="100" spin="-1">
+                    <object folder="0" file="4" x="2.75" y="391.3" angle="250.761" scale_x="1.33692" scale_y="1.04616"/>
+                </key>
+                <key id="3" time="134" spin="-1">
+                    <object folder="0" file="4" x="68.7" y="391.2" angle="248.546" scale_x="1.45069" scale_y="1.06687"/>
+                </key>
+                <key id="4" time="167" spin="0">
+                    <object folder="0" file="4" x="90.9" y="391.15" angle="247.636" scale_x="1.49046" scale_y="1.07568"/>
+                </key>
+                <key id="5" time="200" spin="-1">
+                    <object folder="0" file="4" x="90.9" y="391.15" angle="247.636" scale_x="1.49046" scale_y="1.07568"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="7" name="whip_side" length="600" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="whipline" folder="0" file="3" abs_x="-256.481089" abs_y="-123.086941" abs_angle="155.256" abs_scale_x="1.69822" abs_scale_y="1.4981" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="234">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="267">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="300">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="334">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="367">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="400">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="434">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="467"/>
+                <key id="15" time="500"/>
+                <key id="16" time="534"/>
+                <key id="17" time="567"/>
+                <key id="18" time="600"/>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0">
+                    <object folder="0" file="3" x="-180.7" y="88.1" angle="155.256" scale_x="1.69822" scale_y="1.4981"/>
+                </key>
+                <key id="1" time="34" spin="-1">
+                    <object folder="0" file="3" x="-176.65" y="185" angle="182.518" scale_x="1.69829" scale_y="1.49818"/>
+                </key>
+                <key id="2" time="67" spin="-1">
+                    <object folder="0" file="4" x="82.25" y="358" angle="73.6728" scale_x="-1.63638" scale_y="2.42685"/>
+                </key>
+                <key id="3" time="100" spin="-1">
+                    <object folder="0" file="4" x="326" y="20.15" angle="313.245" scale_x="-1.50022" scale_y="2.58318"/>
+                </key>
+                <key id="4" time="134" spin="-1">
+                    <object folder="0" file="4" x="168.8" y="-93" angle="247.14" scale_x="-1.53969" scale_y="3.08831"/>
+                </key>
+                <key id="5" time="167" spin="-1">
+                    <object folder="0" file="4" x="6.35" y="-140.95" angle="220.298" scale_x="-2.04579" scale_y="2.72739"/>
+                </key>
+                <key id="6" time="200" spin="-1">
+                    <object folder="0" file="4" x="-220.9" y="-20.95" angle="185.665" scale_x="-2.03946" scale_y="2.37705"/>
+                </key>
+                <key id="7" time="234" spin="-1">
+                    <object folder="0" file="6" x="-123.65" y="84.75" angle="148.799" scale_x="-2.32583" scale_y="2.33058"/>
+                </key>
+                <key id="8" time="267">
+                    <object folder="0" file="3" x="140.75" y="-94.15" angle="92.9087" scale_x="2.65351" scale_y="3.08077"/>
+                </key>
+                <key id="9" time="300">
+                    <object folder="0" file="4" x="251.4" y="-1.05" angle="154.969" scale_x="2.11125" scale_y="1.72359"/>
+                </key>
+                <key id="10" time="334">
+                    <object folder="0" file="4" x="211.95" y="119.7" angle="202.665" scale_x="1.69369" scale_y="1.18566"/>
+                </key>
+                <key id="11" time="367">
+                    <object folder="0" file="4" x="187.9" y="178.65" angle="261.25" scale_x="1.25084" scale_y="1.37866"/>
+                </key>
+                <key id="12" time="400">
+                    <object folder="0" file="4" x="163.5" y="217.5" angle="273.611" scale_x="1.14403" scale_y="1.4728"/>
+                </key>
+                <key id="13" time="434" spin="-1">
+                    <object folder="0" file="4" x="150.75" y="244.1" angle="278.032" scale_x="1.03108" scale_y="1.0748"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="8" name="whip_up" length="600" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="whipline" folder="0" file="4" abs_x="280.600169" abs_y="495.213673" abs_angle="270.304" abs_scale_x="1.44254" abs_scale_y="2.22852" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="67">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="100">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="134">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+                <key id="5" time="167">
+                    <object_ref id="0" timeline="0" key="5" z_index="0"/>
+                </key>
+                <key id="6" time="200">
+                    <object_ref id="0" timeline="0" key="6" z_index="0"/>
+                </key>
+                <key id="7" time="234">
+                    <object_ref id="0" timeline="0" key="7" z_index="0"/>
+                </key>
+                <key id="8" time="267">
+                    <object_ref id="0" timeline="0" key="8" z_index="0"/>
+                </key>
+                <key id="9" time="300">
+                    <object_ref id="0" timeline="0" key="9" z_index="0"/>
+                </key>
+                <key id="10" time="334">
+                    <object_ref id="0" timeline="0" key="10" z_index="0"/>
+                </key>
+                <key id="11" time="367">
+                    <object_ref id="0" timeline="0" key="11" z_index="0"/>
+                </key>
+                <key id="12" time="400">
+                    <object_ref id="0" timeline="0" key="12" z_index="0"/>
+                </key>
+                <key id="13" time="434">
+                    <object_ref id="0" timeline="0" key="13" z_index="0"/>
+                </key>
+                <key id="14" time="467">
+                    <object_ref id="0" timeline="0" key="14" z_index="0"/>
+                </key>
+                <key id="15" time="500">
+                    <object_ref id="0" timeline="0" key="15" z_index="0"/>
+                </key>
+                <key id="16" time="534"/>
+                <key id="17" time="567"/>
+                <key id="18" time="600"/>
+            </mainline>
+            <timeline id="0" obj="0" name="whipline">
+                <key id="0">
+                    <object folder="0" file="4" x="34.7" y="417.85" angle="270.304" scale_x="1.44254" scale_y="2.22852"/>
+                </key>
+                <key id="1" time="34">
+                    <object folder="0" file="4" x="-115.95" y="349.2" angle="307.254" scale_x="1.74261" scale_y="2.33903"/>
+                </key>
+                <key id="2" time="67">
+                    <object folder="0" file="3" x="-264.15" y="203.05" angle="353.86" scale_x="2.81033" scale_y="2.2282"/>
+                </key>
+                <key id="3" time="100">
+                    <object folder="0" file="4" x="-214.9" y="13.8" angle="54.4908" scale_x="1.74376" scale_y="2.64001"/>
+                </key>
+                <key id="4" time="134">
+                    <object folder="0" file="3" x="33.6" y="15.75" angle="107.772" scale_x="1.78214" scale_y="2.23283"/>
+                </key>
+                <key id="5" time="167" spin="-1">
+                    <object folder="0" file="4" x="217.95" y="99" angle="206.106" scale_x="1.53437" scale_y="0.979906"/>
+                </key>
+                <key id="6" time="200">
+                    <object folder="0" file="5" x="193" y="60" angle="113.917" scale_x="-0.721674" scale_y="0.967244"/>
+                </key>
+                <key id="7" time="234" spin="-1">
+                    <object folder="0" file="5" x="112.05" y="25" angle="220.49" scale_x="-1.45437" scale_y="0.317264"/>
+                </key>
+                <key id="8" time="267" spin="-1">
+                    <object folder="0" file="7" x="51.6" y="12.3" angle="211.548" scale_x="2.89568" scale_y="0.820625"/>
+                </key>
+                <key id="9" time="300" spin="-1">
+                    <object folder="0" file="1" x="-74.85" y="5.65" angle="86.1371" scale_x="2.69537" scale_y="0.810613"/>
+                </key>
+                <key id="10" time="334" spin="-1">
+                    <object folder="0" file="3" x="-234.7" y="33.75" angle="33.22" scale_x="2.549" scale_y="-0.989937"/>
+                </key>
+                <key id="11" time="367" spin="-1">
+                    <object folder="0" file="3" x="-289.3" y="45.45" angle="17.7293" scale_x="2.54949" scale_y="-0.876536"/>
+                </key>
+                <key id="12" time="400" spin="-1">
+                    <object folder="0" file="4" x="-280.05" y="148.85" angle="352.489" scale_x="1.28417" scale_y="-1.32992"/>
+                </key>
+                <key id="13" time="434" spin="-1">
+                    <object folder="0" file="4" x="-249.1" y="206.25" angle="325.888" scale_x="1.18343" scale_y="-1.30268"/>
+                </key>
+                <key id="14" time="467" spin="-1">
+                    <object folder="0" file="4" x="-236.75" y="221.15" angle="312.947" scale_x="1.12567" scale_y="-1.34074"/>
+                </key>
+                <key id="15" time="500">
+                    <object folder="0" file="4" x="-144.85" y="251.55" angle="267.856" scale_x="1.03598" scale_y="-1.1365"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

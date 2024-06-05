@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="torso">
+        <file id="0" name="torso/torso-0.png" width="68" height="84" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="1" name="torso_pelvis">
+        <file id="0" name="torso_pelvis/torso_pelvis-0.png" width="72" height="48" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="2" name="hand">
+        <file id="0" name="hand/hand-0.png" width="52" height="56" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="lewddisguisekit">
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="1" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="0" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="0" z_index="2"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="torso-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="8" y="15.105882" pivot_x="0.5" pivot_y="0.394118" angle="97.831351"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="torso_pelvis-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="36.840656" y="15.963625" pivot_x="0.446909" pivot_y="0.598551" angle="101.05361" scale_x="1" scale_y="1"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="hand-0">
+                <key id="0" spin="0">
+                    <object folder="2" file="0" x="-64.248705" y="15.544041"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

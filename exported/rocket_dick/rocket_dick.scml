@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="rocket">
+        <file id="0" name="rocket/rocket-0.png" width="33" height="59" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="rocket_dick">
+        <obj_info name="rocket_dick_rocket-0" realname="rocket-0" type="sprite">
+            <frames>
+                <i folder="0" file="0"/>
+            </frames>
+        </obj_info>
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" name="rocket-0" folder="0" file="0" abs_x="-15.069519" abs_y="55.069519" abs_angle="360" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" obj="0" name="rocket-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="0.042073" y="0.163235" pivot_x="0.457927" pivot_y="0.069385"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

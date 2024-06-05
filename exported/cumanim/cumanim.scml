@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="cum">
+        <file id="0" name="cum/cum-0.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="cum/cum-1.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="cum/cum-2.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="cum/cum-3.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="4" name="cum/cum-4.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="1" name="cumanim">
+        <file id="0" name="cumanim/cumanim-0.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="cumanim/cumanim-2.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="cumanim/cumanim-1.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="cumanim/cumanim-3.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="4" name="cumanim/cumanim-4.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="5" name="cumanim/cumanim-5.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+        <file id="6" name="cumanim/cumanim-6.png" width="120" height="120" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="cumanim">
+        <animation id="0" name="1_front" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cum-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="1.00792" y="-0.959022" pivot_x="0.49208" pivot_y="0.459022" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="2_front" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cum-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="1.00792" y="-0.959022" pivot_x="0.49208" pivot_y="0.459022" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="2" name="3_front" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cum-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="1.00792" y="-0.959022" pivot_x="0.49208" pivot_y="0.459022" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="3" name="4_front" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cum-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="1.00792" y="-0.959022" pivot_x="0.49208" pivot_y="0.459022" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="4" name="5_front" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cum-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="1.00792" y="-0.959022" pivot_x="0.49208" pivot_y="0.459022" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="5" name="1_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="2.086331" y="1.844164" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="6" name="2_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="2" x="2.086331" y="1.844164" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="7" name="3_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="1" x="4.964029" y="-0.314109" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="8" name="4_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="3" x="4.964029" y="-0.314109" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="9" name="5_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="4" x="4.964029" y="-0.314109" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="10" name="6_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="5" x="4.964029" y="-0.314109" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="11" name="7_floor" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="cumanim-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="6" x="4.964029" y="-0.314109" pivot_x="0.5" pivot_y="0.42562" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
