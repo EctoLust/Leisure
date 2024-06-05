@@ -1,6 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/dropedclothing.zip"),
+	Asset("ANIM", "anim/droppedmask.zip"),
 }
 local prefabs =
 {
@@ -11,12 +12,16 @@ local prefabs =
 --print(ThePlayer.components.naked.legs_nude)
 local function onpickedfn(inst, picker)
     if picker.components.naked then
-        picker.components.naked:PutOnClothing(inst.type, inst.savedname)
+		if not inst.disquiseitem then
+			picker.components.naked:PutOnClothing(inst.type, inst.savedname)
+		else
+		    picker.components.naked:PutOnDisguise(inst.type, inst.savedname, inst.dick, inst.tits, inst.tint)
+		end
 		picker.sg:GoToState("puton_"..inst.type)
 	    inst:Remove()
 	else
 	    if picker.components.talker then
-	        picker.components.talker:Say("This dirty, will not pickup it.")
+	        picker.components.talker:Say("This dirty, won't pick it up.")
 			inst.components.pickable.canbepicked = true
 		end
 	end
@@ -33,6 +38,18 @@ local function OnSave(inst, data)
 		if inst.savedname then
 		    data.savedname = inst.savedname
 		end
+		if inst.disquiseitem ~= nil then
+		    data.disquiseitem = inst.disquiseitem
+		end
+		if inst.dick ~= nil then
+		    data.dick = inst.dick
+		end
+		if inst.tits ~= nil then
+		    data.tits = inst.tits
+		end
+		if inst.tint ~= nil then
+		    data.tint = inst.tint
+		end
 	end
 end
 
@@ -47,10 +64,22 @@ local function OnLoad(inst, data)
 		if data.savedname then
 		    inst.savedname = data.savedname
 		end
+		if data.disquiseitem ~= nil then
+		    inst.disquiseitem = data.disquiseitem
+		end
+		if data.dick ~= nil then
+		    inst.dick = data.dick
+		end
+		if data.tits ~= nil then
+		    inst.tits = data.tits
+		end
+		if data.tint ~= nil then
+		    inst.tint = data.tint
+		end
 	end
 end
 
-local function fn(isbackground)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -62,11 +91,8 @@ local function fn(isbackground)
     inst.AnimState:SetBank("dropedclothing")
     inst.AnimState:SetBuild("dropedclothing")
     inst.AnimState:PlayAnimation("")
-	
-	if isbackground then
-        inst.AnimState:SetLayer(LAYER_BACKGROUND)
-        inst.AnimState:SetSortOrder(3)
-    end
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(3)
 
     if not TheWorld.ismastersim then
         return inst
@@ -81,16 +107,30 @@ local function fn(isbackground)
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.quickpick = true
 	inst.components.pickable.canbepicked = true
+	inst.disquiseitem = false
 	
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 	
 	inst:DoTaskInTime(0, function()	
 		 if inst.type then
-		     inst.AnimState:PlayAnimation(inst.type)
-			 if inst.savedname then
-			     
-			 end
+			if inst.disquiseitem == true and inst.savedname ~= nil then
+			    if inst.tits ~= nil and inst.tits ~= "" then
+				    inst.AnimState:SetBuild(inst.tits)
+				else
+				    inst.AnimState:SetBuild(inst.savedname)
+				end
+			end
+			if inst.type == "head" then
+	            inst.AnimState:SetBank("droppedmask")
+			    local size = 0.7
+			    inst.Transform:SetScale(size,size,size)	
+                inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)				 
+			end
+			if inst.tint ~= nil then
+			    inst.AnimState:SetMultColour(inst.tint.r, inst.tint.g, inst.tint.b, 1)	
+			end
+			inst.AnimState:PlayAnimation(inst.type)
 		 end
 	end)
 

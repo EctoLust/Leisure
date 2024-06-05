@@ -51,9 +51,10 @@ local NakedScreen = Class(Screen, function(self)
     table.insert(subbuttons, {text="Close", cb=function() self:closemenu() end })
 	table.insert(subbuttons, {text="Stockings", cb=function() self:DoRPC("stockings") end })
 	table.insert(subbuttons, {text="Take off all", cb=function() self:DoRPC("all") end })
+	table.insert(subbuttons, {text="Mask", cb=function() self:DoRPC("head") end })
 
     self.submenu = self.proot:AddChild(Menu(subbuttons, button_w, true, "carny_long", nil, 30))
-    self.submenu:SetPosition(-90, -240, 0)
+    self.submenu:SetPosition(-250, -240, 0)
 	
     for i,v in pairs(self.submenu.items) do
         v:SetScale(.7)
@@ -61,7 +62,7 @@ local NakedScreen = Class(Screen, function(self)
 
     TheInputProxy:SetCursorVisible(true)
     self.default_focus = self.menu
-	self:UpdateButtons()
+	--self:UpdateButtons()
 end)
 
 function NakedScreen:closemenu()
@@ -100,7 +101,7 @@ function NakedScreen:OnUpdate(dt)
 	    feet = ThePlayer.nudefeet_client:value()
 	end     
 	if hand ~= hand_last or body ~= body_last or legs ~= legs_last or feet ~= feet_last then
-	    self:UpdateButtons()
+	    --self:UpdateButtons()
 	end
 end
 

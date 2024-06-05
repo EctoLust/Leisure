@@ -44,7 +44,7 @@ local SexPoseScreen = Class(Screen, function(self)
 
     local buttons = {}
 	
-	if fucker_group == "player" then
+	if fucker_group == "player" or fucker_group == "hermitcrab" then
         table.insert(buttons, {text="Oral", cb=function() self:DoRPC("oral") end })
 	    table.insert(buttons, {text="Ride", cb=function() self:DoRPC("ride") end })
 	    table.insert(buttons, {text="Flipfuck", cb=function() self:DoRPC("flipfuck") end })

@@ -31,6 +31,7 @@ PrefabFiles =
    "chaintits",
    "shadowgoop",
    "plantjuice",
+   "lewddisguisekit",
    -- Characters
    "wormla",
    "wormla_none",
@@ -52,6 +53,10 @@ Assets =
 	Asset("ANIM", "anim/pigman_fap.zip"),
 	Asset("ANIM", "anim/spiderslut_sex.zip"),
 	Asset("ANIM", "anim/fapanims.zip"),
+	Asset("ANIM", "anim/disguiseuidoll.zip"),
+	
+	Asset("ANIM", "anim/cumnew.zip"),
+	Asset("ANIM", "anim/cumanim.zip"),
 	
 	Asset("ANIM", "anim/shadowrape.zip"),
 	
@@ -162,8 +167,8 @@ Assets =
 	Asset( "IMAGE", "images/names_gold_wormla.tex" ),
     Asset( "ATLAS", "images/names_gold_wormla.xml" ),
 	
-	
-	
+	Asset( "ANIM", "anim/wormla.zip" ),
+	Asset( "ANIM", "anim/ghost_wormla_build.zip" ),
 	Asset("ANIM", "anim/cdman.zip"),
 }
 
@@ -191,8 +196,8 @@ TUNING.NO_RAPE_DAMAGE = GetModConfigData("rape_no_damage")
 TUNING.OLD_CUM_TYPE = 0
 
 TUNING.TENT_USES = 100
-
 modimport("lewd_strings.lua")
+modimport("lewd_nethook.lua")
 modimport("scripts/suckoff_action.lua") 
 modimport("scripts/sex_action.lua")
 modimport("scripts/play_action.lua")
@@ -473,7 +478,7 @@ local function Cum(inst)
 		    for x2 = 1, 3, 1 do
 	            local cum = GLOBAL.SpawnPrefab("cumfloor")
 				
-				if inst.components.naked.havedick == false then
+				if not inst.components.naked:IsHasDick()then
 	                local num = math.random(7)
 	                cum.AnimState:PlayAnimation(num.."_front")				    
 				end
@@ -487,7 +492,7 @@ local function Cum(inst)
 					local rob = inst:HasTag("ROBOT")
 					local symb = "face"
 					
-					if inst.components.naked.havedick == false then
+					if not inst.components.naked:IsHasDick() then
 					    fem = true
 					end				
 					if inst.sg:HasStateTag("cancumonbody") then
@@ -956,11 +961,18 @@ local function MyPlayerMain(inst)
 	inst:ListenForEvent("stopfuck", StopFuck)
 	inst:ListenForEvent("stopmonsterfuck", StopMonsterFuck)
 	inst:ListenForEvent("ms_closewardrobe", NudeReset)
+	inst:ListenForEvent("onremove", function()
+	    if inst.userid ~= nil and inst.userid ~= "" then
+		    GLOBAL.ClientChangedDisguise(inst.userid, "", "MyPlayerMain:onremove")
+			if inst == GLOBAL.ThePlayer then
+			    GLOBAL.SetClientDisguise(inst.userid, "")
+			end
+		end
+	end)
 
 
 	inst.Old_S = inst.OnSave
 	inst.Old_L = inst.OnLoad
-	
     inst.OnSave = function(inst, data) 
 	    if data then
             if inst.lube and inst.lube > 0 then
@@ -978,6 +990,9 @@ local function MyPlayerMain(inst)
 			end
 			if inst.stickysalve and inst.stickysalve > 0 then
 			    data.stickysalve = inst.stickysalve
+			end
+			if inst.bodyconfigstate ~= nil then
+			    data.bodyconfigstate = inst.bodyconfigstate
 			end
 	    end
 	    if inst.Old_S ~= nil then
@@ -1002,6 +1017,14 @@ local function MyPlayerMain(inst)
 			end
 			if data.stickysalve then
 			    inst.stickysalve = data.stickysalve
+			end
+			if data.bodyconfigstate then
+			    inst.bodyconfigstate = data.bodyconfigstate
+				if inst.bodyconfigstate == "inmenu" then
+				    inst:DoTaskInTime(0, function()
+					    GLOBAL.TheWorld:PushEvent("ms_playerdespawnanddelete", inst)
+					end)
+				end
 			end
 	    end
 	    if inst.Old_L ~= nil then
@@ -1059,7 +1082,8 @@ local function HookPortal(inst)
 	inst:ListenForEvent("ms_newplayercharacterspawned", function(world, data) 
         if data and data.player then
             data.player:DoTaskInTime(0, function(inst)
-                data.player:Hide()
+                data.player.bodyconfigstate = "inmenu"
+				data.player:Hide()
 				data.player.components.playercontroller:Enable(false)
 				data.player.components.health:SetInvincible(true)
 				data.player.lewdstart_client:push()
@@ -1097,7 +1121,7 @@ AddPrefabPostInit("trinket_8", function(inst)
 end)
 
 AddPrefabPostInit("forest", function(inst) 
-
+    GLOBAL.RegisterDisguiseNetHook(inst)
     if not GLOBAL.TheWorld.ismastersim then
         return inst
     end

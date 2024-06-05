@@ -117,6 +117,11 @@ local function onuiclock(self)
 	         local openscreen = LustScreen(self)
 	         GLOBAL.TheFrontEnd:PushScreen(openscreen)    
         end)
+        player:ListenForEvent("lewddisguisekit.client", function(inst)
+	         local Screen = GLOBAL.require "screens/lewddisguisekit"
+	         local openscreen = Screen(self)
+	         GLOBAL.TheFrontEnd:PushScreen(openscreen)    
+        end)		
 		
 		GLOBAL.ThePlayer:DoPeriodicTask(0.5, function()
 		    if GLOBAL.ThePlayer.dildo_client:value() then
@@ -280,7 +285,7 @@ AddModRPCHandler("LEWD", "TAKEOFF", function(inst, wtf, typeoff)
 	else
         if inst.sg:HasStateTag("idle") and inst.components.naked then		    			
 			if typeoff ~= "all" and typeoff ~= "stockings" then	
-			    if not inst.components.naked:IsNaked(typeoff) then		
+			    if inst.components.naked:CanTakeItOff(typeoff) then		
 			        if typeoff ~= "hand" then
 			            inst.sg:GoToState("takeoff_"..typeoff)
 			        else
@@ -288,8 +293,8 @@ AddModRPCHandler("LEWD", "TAKEOFF", function(inst, wtf, typeoff)
 			        end
 			    end
 			elseif typeoff == "all" then
-			    if not inst.components.naked:IsNaked("hand") and not inst.components.naked:IsNaked("body") 
-				and not inst.components.naked:IsNaked("legs") and not inst.components.naked:IsNaked("feet") then	
+			    if inst.components.naked:CanTakeItOff("hand") and inst.components.naked:CanTakeItOff("body") 
+				and inst.components.naked:CanTakeItOff("legs") and inst.components.naked:CanTakeItOff("feet") then	
 				    inst.sg:GoToState("takeoff_all")
 				end
 			elseif typeoff == "stockings" then
@@ -321,7 +326,6 @@ AddModRPCHandler("LEWD", "UNDILDO", function(inst, wtf)
 	        inst.components.naked.dick = "none"
 	        inst.AnimState:ClearOverrideSymbol("dick")
 			inst.AnimState:ClearOverrideSymbol("swap_body_tall")
-	        inst.components.naked.havedick = false
 		    inst.dildo_client:set(false) 
             inst.components.lootdropper:SpawnLootPrefab("strapon")
 			inst:RemoveTag("HaveDick")
@@ -336,16 +340,16 @@ AddModRPCHandler("LEWD", "POSE", function(inst, wtf, pose)
 	    print("KLEI DATA "..tostring(wtf))
 	    print("POSE "..tostring(pose))
 	end
-    if inst and inst.partner and inst.partner:HasTag("player") then 
+    if inst and inst.partner and (inst.partner:HasTag("player") or inst.partner:HasTag("PLAYERALIKE")) then 
 		local target = inst.partner
 		local me = inst
 		
         if pose == "strip" then
             if target.components.naked then				
-				if not target.components.naked:IsNaked("hand") then target.components.naked:TakeOffClothing("hand") end
-				if not target.components.naked:IsNaked("body") then target.components.naked:TakeOffClothing("body") end
-				if not target.components.naked:IsNaked("legs") then target.components.naked:TakeOffClothing("legs") end
-				if not target.components.naked:IsNaked("feet") then target.components.naked:TakeOffClothing("feet") end
+				if target.components.naked:CanTakeItOff("hand") then target.components.naked:TakeOffClothing("hand") end
+				if target.components.naked:CanTakeItOff("body") then target.components.naked:TakeOffClothing("body") end
+				if target.components.naked:CanTakeItOff("legs") then target.components.naked:TakeOffClothing("legs") end
+				if target.components.naked:CanTakeItOff("feet") then target.components.naked:TakeOffClothing("feet") end
 		    end
             return			
 		end
@@ -400,12 +404,15 @@ AddModRPCHandler("LEWD", "POSE_MONSTER", function(inst, wtf, pose)
 	end
 end)
 
-AddModRPCHandler("LEWD", "SPAWNED", function(inst, wtf, tits, dick, nude)
-    if inst == nil then 
+AddModRPCHandler("LEWD", "SPAWNED", function(inst, wtf, tits, dick, nude, dis, dis_dick, dis_nude, dis_tits, _r, _g, _b, rdis, gdis, bdis)
+	if inst == nil then 
 	    return 
 	else
-        if inst.components.naked then		    			           			
+        inst.bodyconfigstate = "done"
+		if inst.components.naked then		    			           			
 			inst.components.naked.nude_build = nude
+			inst.components.naked.nude_tint = {r =_r, g = _g, b = _b}
+			
 			if tits ~= "" and tits ~= "none" then			
 			    inst.components.naked.havetits = true
 			    inst.components.naked.titssize = tits
@@ -420,19 +427,31 @@ AddModRPCHandler("LEWD", "SPAWNED", function(inst, wtf, tits, dick, nude)
 			end
 			
 			if dick ~= "" and dick ~= "none" then
-			    inst.components.naked.havedick = true
 			    inst.components.naked.dick = dick
 				inst.AnimState:OverrideSymbol("dick", dick, "dick")
 				inst:AddTag("HaveDick")
             else	
-			    inst.components.naked.havedick = false
 			    inst.components.naked.dick = "none"
                 inst.AnimState:ClearOverrideSymbol("dick")
                 inst:RemoveTag("HaveDick")				
 			end
-	        -- print("[RPC] Tits "..inst.components.naked.titssize)	
-	        -- print("[RPC] Dick "..inst.components.naked.dick)
-	        -- print("[RPC] Nude skin "..inst.components.naked.nude_build)			
+			
+			if dis and dis ~= "" then
+			    inst.components.naked:SetFullDisguise(dis, dis_dick, dis_nude, dis_tits, {r = rdis, g = gdis, b = bdis})
+				inst.components.naked:Fixup()
+			end
+	        print("[RPC] Tits "..inst.components.naked.titssize)	
+	        print("[RPC] Dick "..inst.components.naked.dick)
+	        print("[RPC] Nude skin "..inst.components.naked.nude_build)
+			print("[RPC] R "..inst.components.naked.nude_tint.r)
+			print("[RPC] G "..inst.components.naked.nude_tint.g)
+			print("[RPC] B "..inst.components.naked.nude_tint.b)
+			print("[RPC] Dis Prefab "..dis)
+			print("[RPC] Dis Nude "..dis_nude)
+			print("[RPC] Dis Tits "..dis_tits)
+			print("[RPC] Dis R "..rdis)
+			print("[RPC] Dis G "..gdis)
+			print("[RPC] Dis B "..bdis)
 		end
 		GLOBAL.SpawnEffect(GLOBAL.TheWorld.spawn_portal,inst)
 		if inst.userid == "KU_FN8AJYjo" then
@@ -442,6 +461,36 @@ AddModRPCHandler("LEWD", "SPAWNED", function(inst, wtf, tits, dick, nude)
 		if TUNING.LUSTBOOK_ONSPAWN == 1 then
 		    inst.components.inventory:GiveItem(GLOBAL.SpawnPrefab("lustbook_item"))
 		end
+		inst.sg:GoToState("idle") -- sometimes special custom idle can play in time of spawn. Animation can start before we apply disguise. So we gotta reset it to idle, to not show off identity by old special idle anim.
+	end
+end)
+
+AddModRPCHandler("LEWD", "DISKIT", function(inst, wtf, part, data, titssize, dick)
+    if inst ~= nil and not inst:HasTag("playerghost") then 
+		if part ~= nil and part ~= "" and data ~= nil and data ~= "" then
+		    if part == "head" then
+			    inst.components.naked:PutOnDisguise("head", data)
+				inst.sg:GoToState("puton_head")
+			elseif part == "body" then
+	            local tits = GetTitsBySize(data, titssize)
+	            if tits == nil then 
+		            tits = data
+	            end			    
+				inst.components.naked:PutOnDisguise("body", tits, nil, titssize)
+				inst.sg:GoToState("puton_body")
+			elseif part == "hands" then
+			    inst.components.naked:PutOnDisguise("hand", data)
+				inst.sg:GoToState("puton_hand")
+			elseif part == "legs" then
+			    inst.components.naked:PutOnDisguise("legs", data, dick, nil)
+				inst.sg:GoToState("puton_legs")
+            elseif part == "feets" then
+                inst.components.naked:PutOnDisguise("feet", data)	
+                inst.sg:GoToState("puton_feet")				
+			end
+		else
+		    inst.sg:GoToState("idle")
+	    end
 	end
 end)
 
@@ -451,6 +500,8 @@ AddPrefabPostInit("cumnew", function(inst)
 end)
 
 local function customhppostinit(inst)
+	GLOBAL.RegisterDisguiseNetHook(inst)
+	
 	inst.lube_client = GLOBAL.net_shortint(inst.GUID, "lube.client", "lube_clientdirty")
 	inst.stickysalve_client = GLOBAL.net_shortint(inst.GUID, "stickysalve.client", "stickysalve_clientdirty")
 	inst.anticum_client = GLOBAL.net_shortint(inst.GUID, "anticum.client", "anticum_clientdirty")
@@ -469,6 +520,7 @@ local function customhppostinit(inst)
 	inst.libido_on_client = GLOBAL.net_bool(inst.GUID, "libido_on.client")
 	
 	inst.lustbook_client = GLOBAL.net_event(inst.GUID, "lustbook.client")
+	inst.lewddisguisekit_client = GLOBAL.net_event(inst.GUID, "lewddisguisekit.client")
 	
 	inst.lewdstart_client = GLOBAL.net_event(inst.GUID, "lewdstart.client")
 	
@@ -514,3 +566,11 @@ local function customhppostinit(inst)
 end
 
 AddPlayerPostInit(customhppostinit)
+
+-- local function craftinghud(self)
+    -- self.page_spinner:Hide()
+	-- self.pin_slots = {}
+	-- TUNING.MAX_PINNED_RECIPES = 0
+-- end
+
+-- AddClassPostConstruct("widgets/redux/craftingmenu_pinbar", craftinghud)

@@ -29,6 +29,7 @@ local sexrecipes={
 "libidopill",
 "antilibidopill",
 "plantjuice",
+"lewddisguisekit",
 }
 
 for k,v in pairs(sexrecipes) do
@@ -167,6 +168,12 @@ QuickAddRecipe("wormla_whip",
     GLOBAL.Ingredient("cutreeds", 3),
 	GLOBAL.Ingredient("stinger", 3)
 },GLOBAL.TECH.SCIENCE_ONE, nil, "wormla")
+
+QuickAddRecipe("lewddisguisekit", 
+{
+    GLOBAL.Ingredient("mosquitosack", 1),
+	GLOBAL.Ingredient("spidergland", 1)
+},GLOBAL.TECH.NONE)
 
 AddIngredientValues({"petals"}, {petals = 1})
 AddIngredientValues({"spidergland"}, {spidergland = 1})

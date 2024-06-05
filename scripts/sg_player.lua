@@ -125,7 +125,7 @@ local fap_state = State{
 				inst.components.inventory:DropItem(hands_item)
 			end 
 			
-			if inst.components.naked.havedick == false then
+			if not inst.components.naked:IsHasDick() then
 			    inst.AnimState:PlayAnimation("emote_pre_sit2")
 			    inst.AnimState:PushAnimation("fap_loop_girl_new_new", true)
 			else
@@ -656,6 +656,29 @@ local puton_hand = State{
         onexit = function(inst)
         end,
     }
+local puton_head = State{
+        name = "puton_head",
+		tags = {"busy", "nopredict"},
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:Clear()
+			inst:ClearBufferedAction()
+			inst.AnimState:PlayAnimation("emote_hat", false)
+        end,
+		
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+        end,
+    }
 local takeoff_legs = State{
         name = "takeoff_legs",
 		tags = {"busy", "nopredict"},
@@ -751,6 +774,38 @@ local takeoff_feet = State{
 					elseif inst.AnimState:IsCurrentAnimation("pickup_pst") then
 					    inst.sg:GoToState("idle")
 					end
+                end
+            end),
+        },
+
+        onexit = function(inst)
+        end,
+    }
+local takeoff_head = State{
+        name = "takeoff_head",
+		tags = {"busy", "nopredict"},
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:Clear()
+			inst:ClearBufferedAction()
+			inst.AnimState:PlayAnimation("emote_hat", false)
+        end,
+		
+        timeline =
+        {
+            TimeEvent(18 * FRAMES, function(inst)
+                 if inst.components.naked then
+				     inst.components.naked:TakeOffClothing("head")
+				 end
+            end),
+		},
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
                 end
             end),
         },
@@ -979,6 +1034,122 @@ local doggy_girl = State{
         end,
     }
 	
+local handjob = State{
+        name = "handjob",
+        tags = {"fuck", "nopredict", "cancumonface"},
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:Clear()
+			inst:ClearBufferedAction()
+			inst.Transform:SetNoFaced(inst)
+			local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+			if hands_item ~= nil then
+			    inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
+				inst.components.inventory:DropItem(hands_item)
+			end 
+		
+			local fuckmode = inst.components.naked:CheckSexGender()		
+			inst.components.naked:AnimWithTits(true)
+			inst.components.sex:SetTempMax(5)
+			
+			if fuckmode == "lesbian" or fuckmode == "partner" then			
+			    inst.AnimState:PlayAnimation("handjob_lez", false)
+			else
+			    inst.AnimState:PlayAnimation("handjob_"..inst.components.sex.temp, false)
+			end
+			
+			
+        end,
+		
+        timeline =
+        {
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.sg:RemoveStateTag("nopredict")
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+					  if inst.AnimState:IsCurrentAnimation("handjob_"..inst.components.sex.tempmax-1) then
+					      inst.components.sex.temp = inst.components.sex.tempmax
+					  end		
+					  inst.AnimState:PlayAnimation("handjob_"..inst.components.sex.temp, false)
+				      if inst.AnimState:IsCurrentAnimation("handjob_"..inst.components.sex.tempmax-1) then
+                          inst:DoTaskInTime(0.5, function()
+						       inst:PushEvent("cum")
+						  end)                          
+						  inst:DoTaskInTime(1.3, function()
+						       inst:PushEvent("cum")
+						  end)
+					  end						  
+                end				
+            end),
+        },
+
+        onexit = function(inst)
+			inst:PushEvent("stopfuck")
+			inst.components.naked:AnimWithTits(false)
+			inst.components.sex:CumAnim(false)			
+        end,
+    }
+	
+local handjob_girl = State{
+        name = "handjob_girl",
+        tags = {"fuck", "nopredict"},
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:Clear()
+			inst:ClearBufferedAction()
+			inst.Transform:SetNoFaced(inst)
+			local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+			if hands_item ~= nil then
+			    inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
+				inst.components.inventory:DropItem(hands_item)
+			end 
+		
+			local fuckmode = inst.components.naked:CheckSexGender()		
+			inst.components.naked:AnimWithTits(true)
+			inst.components.sex:CumAnim(true)
+			inst.components.sex:SetTempMax(5)
+			-- ThePlayer.components.sex:SetTemp(4)
+			if fuckmode == "partner" or fuckmode == "gay" then					    
+				inst.AnimState:PlayAnimation("handjob_girl_"..inst.components.sex.temp, false)
+			else
+			    inst.AnimState:PlayAnimation("handjob_girl_lez", false)
+			end
+			
+        end,
+		
+        timeline =
+        {
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.sg:RemoveStateTag("nopredict")
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+				      if inst.AnimState:IsCurrentAnimation("handjob_girl_"..inst.components.sex.tempmax-1) then
+					      inst.components.sex.temp = inst.components.sex.tempmax
+					  end				      
+					  inst.AnimState:PlayAnimation("handjob_girl_"..inst.components.sex.temp, false)
+                end
+            end),
+        },
+
+        onexit = function(inst)
+		    inst.components.naked:AnimWithTits(false)
+			inst.components.sex:CumAnim(false)
+			inst:PushEvent("stopfuck")
+        end,
+    }	
+	
 local titsplay = State{
         name = "titsplay",
         tags = { "nopredict" },
@@ -1043,7 +1214,7 @@ local function AddMonsterFuckSG(sg, sgname, alt, drop)
 			
 			inst:AddTag("CantAttackAtFuck")
 			
-			if inst.components.naked.havedick == false then
+			if not inst.components.naked:IsHasDick()then
 			    if alt == "player_fuck_spiderslut" or alt == "spiderslut_fuck_player" then
 			        alt = "spiderslut_fuck_player_fem"
 			    end
@@ -1092,7 +1263,7 @@ local function AddFriendlyFuckSG(sg, sgname, alt)
 				inst.components.inventory:DropItem(hands_item)
 			end
 			
-			if inst.components.naked.havedick == false then
+			if not inst.components.naked:IsHasDick() then
 			    if alt == "player_fuck_spiderslut" or alt == "spiderslut_fuck_player" then
 			        alt = "spiderslut_fuck_player_fem"
 			    end
@@ -1190,7 +1361,7 @@ local fap_pigman = State{
     }
 
 local function SGWilsonPostInit(sg)
-	
+	print("SGWilsonPostInit")
 	sg.states["suck_state"] = suck_state
 	sg.states["suckenjoy_state"] = suckenjoy_state
 	sg.states["lick_state"] = lick_state
@@ -1206,6 +1377,8 @@ local function SGWilsonPostInit(sg)
 	sg.states["kness"] = kness
 	sg.states["doggy"] = doggy
     sg.states["doggy_girl"] = doggy_girl
+	sg.states["handjob"] = handjob
+    sg.states["handjob_girl"] = handjob_girl	
 	
 	sg.states["dilding"] = dilding
 	sg.states["vibrating"] = vibrating
@@ -1266,14 +1439,20 @@ local function SGWilsonPostInit(sg)
 	sg.states["puton_feet"] = puton_feet
 	sg.states["puton_hand"] = puton_hand
 	
+	sg.states["puton_head"] = puton_head
+	
 	sg.states["takeoff_legs"] = takeoff_legs
 	sg.states["takeoff_body"] = takeoff_body
 	sg.states["takeoff_feet"] = takeoff_feet
+	
+	sg.states["takeoff_head"] = takeoff_head
+	
 	sg.states["takeoff_all"] = takeoff_all
 end
---flipfuck_girl
---ThePlayer.sg:GoToState("flipfuck_girl")
+
 AddStategraphPostInit("wilson", SGWilsonPostInit)
+AddStategraphPostInit("hermit", SGWilsonPostInit)
+
 
 local function SGPigmanPostInit(sg)
     sg.states["fap"] = fap_pigman

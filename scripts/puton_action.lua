@@ -17,11 +17,11 @@ AddAction("PUTON", "Wear", function(act)
     end
 end)
 
-function SetupBottleDrinkActions(inst, doer, actions)
+function SetupActions(inst, doer, actions)
 	table.insert(actions, GLOBAL.ACTIONS.PUTON)
 end
 
-AddComponentAction("INVENTORY", "puton", SetupBottleDrinkActions)
+AddComponentAction("INVENTORY", "puton", SetupActions)
 
 local State = GLOBAL.State
 local TimeEvent = GLOBAL.TimeEvent

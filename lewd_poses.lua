@@ -59,6 +59,7 @@ AddPosesGroup("spider", {"player_fuck_spider","player_fuck_spider2"})
 AddPosesGroup("spiderqueen", {"player_fuck_spiderslut","player_fuck_spiderslut2"})
 AddPosesGroup("catcoon", {"player_fuck_catcoon","player_fuck_catcoon2"})
 AddPosesGroup("tentacle", {"tentacle_fuck_player_wurt","tentacle_fuck_player_wurt2"})
+AddPosesGroup("hermitcrab", {"oral","ride","flipfuck","onkness","doggy","swap"})
 
 LinkPosesGroup("merm")
 LinkPosesGroup("pigman", "merm")
@@ -72,6 +73,7 @@ LinkPosesGroup("spider_dropper", "spider")
 LinkPosesGroup("spiderqueen")
 LinkPosesGroup("catcoon")
 LinkPosesGroup("tentacle")
+LinkPosesGroup("hermitcrab")
 
 local AddToLewdCatalog = GLOBAL.AddToLewdCatalog
 	

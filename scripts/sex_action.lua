@@ -13,8 +13,11 @@ local TheNet = GLOBAL.TheNet
 
 AddAction("SEX", "Have sex with", function(act)
 	if act.target and act.doer then
-	    if act.target:HasTag("sexable") or (act.target:HasTag("plantfuck") and act.doer:HasTag("plantkin")) then
-		    if not act.target:HasTag("MONSTER_PERVERT") and not act.target:HasTag("MONSTER_OBJECT") then
+		if act.target:HasTag("sexable") or (act.target:HasTag("plantfuck") and act.doer:HasTag("plantkin")) then
+			if act.target:HasTag("PLAYERALIKE") then
+				return act.doer.components.sex:FuckCrabbyMommy(act.target, act.doer)
+			end
+			if not act.target:HasTag("MONSTER_PERVERT") and not act.target:HasTag("MONSTER_OBJECT") then
 		        return act.doer.components.sex:Fuck(act.doer, act.target)
 			elseif act.target:HasTag("MONSTER_PERVERT") then
 			    return act.doer.components.sex:FriedlyMonsterFuck(act.doer, act.target)

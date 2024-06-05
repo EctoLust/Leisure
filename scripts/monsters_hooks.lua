@@ -70,7 +70,10 @@ local function ExitFuck(inst)
     if inst:HasTag("HavingSex") then
     RetrunPhisics(inst)
     inst:RemoveTag("HavingSex")
-	inst.components.combat.canattack = true
+	if inst.components.combat then
+	    inst.components.combat.canattack = true
+	end
+	
     if inst.partner then
         inst:DoTaskInTime(0.1, 
 		function()
@@ -104,7 +107,10 @@ end
 
 local function EnterInFuck(inst)
 	inst:AddTag("HavingSex")
-	inst.components.combat.canattack = false
+	if inst.components.combat then
+	    inst.components.combat.canattack = false
+	end
+	
     if inst:HasTag("FallOnFuckEnd") and inst.partner then
 		inst.partner:AddTag("FallAfterFuck")
 	elseif inst:HasTag("WakeupOnFuckEnd") and inst.partner then
@@ -116,16 +122,19 @@ local function EnterInFuck(inst)
 	    inst.components.locomotor.runspeed = 0
 	    inst.components.locomotor.walkspeed = 0
 	end
-	if inst.sg and inst.prefab ~= "lureplant" then
-		inst.sg:GoToState("idle")
-	else
-	    inst:Hide()
+	if inst.prefab ~= "hermitcrab" then
+		if inst.sg and inst.prefab ~= "lureplant" then
+		    inst.sg:GoToState("idle")
+	    else
+	        inst:Hide()
+	    end
 	end
+
 	inst:StopBrain()
 end
 
 local function KillAllTaskInSex(inst)
-    if inst:HasTag("HavingSex") then
+    if inst:HasTag("HavingSex") and inst.prefab ~= "hermitcrab" then
 	    if inst.components.combat then
 		    inst.components.combat:SetTarget(nil)
 		end
@@ -620,3 +629,72 @@ end
 AddPrefabPostInit("pigman", PigTypeBuild)
 AddPrefabPostInit("moonpig", PigTypeBuild)
 AddPrefabPostInit("pigguard", PigTypeBuild)
+
+AddPrefabPostInit("merm", function(inst)
+    inst.swapbuildname = "merm_build"
+	inst.fuckonkillstate = "merm_fuck_player"
+	inst.friendlyfuck = "player_fuck_merm"
+	inst.dick = "merm_dick"
+	MonsterPerventCommon(inst)
+	inst:AddTag("FUCKABLETENTACLE")
+	
+	if not GLOBAL.TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.cumforrest = 5
+	inst.cumrestoretime = 240
+	
+	inst:AddComponent("groom")
+	
+	inst:DoPeriodicTask(2, GroomFn)
+	
+	inst.AnimState:OverrideSymbol("pig_torso", "merm_torso_dick", "pig_torso") 
+	
+    inst:DoPeriodicTask(0, function()
+		if inst.components.follower and inst.components.follower.leader ~= nil then
+		    inst:AddTag("sexable")
+		else
+		    inst:RemoveTag("sexable")
+		end
+	end)
+end)
+
+AddPrefabPostInit("catcoon", function(inst)
+    inst.swapbuildname = "catcoon_build"
+	inst.fuckonkillstate = "catcoon_fuck_player"
+	inst.friendlyfuck = "player_fuck_catcoon"
+	inst.dick = "wortox_dick"
+	MonsterPerventCommon(inst)
+	inst:AddTag("FUCKABLETENTACLE")
+	
+	if not GLOBAL.TheWorld.ismastersim then
+        return inst
+    end
+	
+    inst:DoPeriodicTask(0, function()
+		if inst.components.follower and inst.components.follower.leader ~= nil then
+		    inst:AddTag("sexable")
+		else
+		    inst:RemoveTag("sexable")
+		end
+	end)
+end)
+
+local function Hermit(inst)
+	MonsterPerventCommon(inst)
+	inst:RemoveTag("MONSTER_PERVERT")
+	inst:RemoveTag("MALE")
+	
+	inst:AddTag("PLAYERALIKE")
+	inst:AddTag("sexable")
+	inst:AddTag("FEMALE")
+	
+	if not GLOBAL.TheWorld.ismastersim then
+        return inst
+    end
+	inst:AddComponent("naked")
+	inst:AddComponent("cumattachable")
+end
+
+AddPrefabPostInit("hermitcrab", Hermit)

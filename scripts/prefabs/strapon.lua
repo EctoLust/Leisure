@@ -17,7 +17,6 @@ local function OnUse(inst, user)
 	if not user.components.naked:IsHasDick() then	
 	    user.components.naked.dick = "strapon_dick"
 	    user.AnimState:OverrideSymbol("dick", user.components.naked.dick, "dick")
-	    user.components.naked.havedick = true
 	    if user.components.talker then
 		    user.components.talker:Say("Good! Now I can use it in sex!")
 	    end

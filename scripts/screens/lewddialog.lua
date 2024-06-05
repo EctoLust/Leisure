@@ -134,7 +134,9 @@ local LewdDialog = Class(Screen, function(self)
 	--self.puppet:SetCharacter(ThePlayer.prefab)
 	self.puppet:Hide()
 	self.puppet:SetSkins(ThePlayer.prefab, self.base_skin, {}, true)
-	self:SetNude()
+	--self:SetNude()
+	
+	self.nudebuildoptions = GetNudeBuildOptions(false)
 	
 	if TUNING.TUTORIAL_SKIP == 1 then
 	    self:StartEdit()
@@ -204,12 +206,341 @@ function LewdDialog:ReCreateTitsSelect()
 	self.tits_ui:SetSelectedIndex(NameToIndex[self.tits])
 end
 
+function LewdDialog:ReCreateTitsSelectDisguise()
+	if self.tits_ui_disguise ~= nil then
+	    self.tits_ui_disguise:Kill()
+	end
+	
+	if CanChangeBoobsSize(self.nude_build_disguise) then
+	    self.tits_ui_disguise = self.root:AddChild(CreateTextSpinner("Tits", { 
+	    { text = "None", data = "none" }, 
+	    { text = "Flat", data = "flat" }, 
+	    { text = "Small", data = "small" },
+        { text = "Medium", data = "medium" },	
+	    { text = "Large", data = "large" } }))
+	else
+	    self.tits_ui_disguise = self.root:AddChild(CreateTextSpinner("Tits", { -- For characters that already naked by default.
+	    { text = "Locked", data = "none" } })) 
+	end
+	
+	self.tits_ui_disguise:SetPosition(-75, -100)
+	self.tits_ui_disguise.OnChanged = function( _, data )
+	    self.tits_disguise = data
+		self:ApplyDisguise(self.selected_disguise)
+	end
+	self.tits_ui_disguise:SetSelectedIndex(NameToIndex[self.tits_disguise])
+end
+
+local CharsList = GetActiveCharacterList()
+
+function LewdDialog:ApplyDisguise(prefab, skipanimchange)
+	self:SetSymbolTintDis("arm_upper_skin")
+	self:SetSymbolTintDis("arm_upper")
+	self:SetSymbolTintDis("hand")
+	self:SetSymbolTintDis("arm_lower")
+	self:SetSymbolTintDis("arm_lower_cuff")
+	self:SetSymbolTintDis("leg")
+	self:SetSymbolTintDis("torso")
+	self:SetSymbolTintDis("torso_pelvis")
+	self:SetSymbolTintDis("foot")
+	self:SetSymbolTintDis("dick")
+	if prefab == "" then
+		self.puppet.animstate:ClearOverrideSymbol("head")
+		self.puppet.animstate:ClearOverrideSymbol("headbase")
+		self.puppet.animstate:ClearOverrideSymbol("headbase_hat")
+		self.puppet.animstate:ClearOverrideSymbol("cheeks")
+		self.puppet.animstate:ClearOverrideSymbol("face")
+		self.puppet.animstate:ClearOverrideSymbol("face_sail")
+		self.puppet.animstate:ClearOverrideSymbol("hair")
+		self.puppet.animstate:ClearOverrideSymbol("hair_hat")
+		self.puppet.animstate:ClearOverrideSymbol("hairfront")
+		self.puppet.animstate:ClearOverrideSymbol("hairpigtails")	    
+		self.puppet:SetCharacter(ThePlayer.prefab)
+		self.puppet:SetSkins(ThePlayer.prefab, self.base_skin, {}, true)
+		self:SetNude()
+		self.dick_text:Hide()
+		self.dick_ui_disguise:Hide()
+		self.nude_text:Hide()
+	    self.nude_custom_disguise:Hide()
+		self.tits_text:Hide()
+		self.tits_ui_disguise:Hide()
+		self.tint_text:Hide()
+		self.tint_r_dis:Hide()
+		self.tint_g_dis:Hide()
+		self.tint_b_dis:Hide()
+		self.tint_r_field_dis:Hide()
+		self.tint_g_field_dis:Hide()
+		self.tint_b_field_dis:Hide()
+		self.tint_r_field_dis.done_btn:Hide()
+		self.tint_g_field_dis.done_btn:Hide()
+		self.tint_b_field_dis.done_btn:Hide()
+		return
+	end
+	self.dick_text:Show()
+	self.dick_ui_disguise:Show()
+	self.nude_text:Show()
+	self.nude_custom_disguise:Show()
+	self.tits_text:Show()
+	self.tits_ui_disguise:Show()
+	self.tint_text:Show()
+	self.tint_r_dis:Show()
+	self.tint_g_dis:Show()
+	self.tint_b_dis:Show()
+	if self.tint_r_field_dis.editmode then
+		self.tint_r_field_dis:Show()
+	end
+	if self.tint_g_field_dis.editmode then
+		self.tint_g_field_dis:Show()
+	end
+	if self.tint_b_field_dis.editmode then
+		self.tint_b_field_dis:Show()
+	end
+	self.tint_r_field_dis.done_btn:Show()
+	self.tint_g_field_dis.done_btn:Show()
+	self.tint_b_field_dis.done_btn:Show()
+    local build = self.nude_build_disguise
+	if build == nil or build == "" then
+	    build = prefab
+	end
+	local titssize = self.tits_disguise
+	local titsbuild = GetTitsBySize(prefab, titssize)	
+	if titsbuild == nil then
+	    titsbuild = build
+	end
+	
+	self.puppet.animstate:OverrideSymbol("torso", build, "torso")
+	self.puppet.animstate:OverrideSymbol("arm_upper_skin", build, "arm_upper_skin")	
+	self.puppet.animstate:OverrideSymbol("arm_upper", build, "arm_upper")	
+	self.puppet.animstate:OverrideSymbol("hand", build, "hand")
+	self.puppet.animstate:OverrideSymbol("arm_upper_skin", build, "arm_upper_skin")	
+	self.puppet.animstate:OverrideSymbol("arm_lower", build, "arm_lower")	
+	self.puppet.animstate:OverrideSymbol("arm_lower_cuff", build, "arm_lower_cuff")	
+	self.puppet.animstate:OverrideSymbol("leg", build, "leg")
+	self.puppet.animstate:OverrideSymbol("skirt", build, "skirt")
+	self.puppet.animstate:OverrideSymbol("torso_pelvis", build, "torso_pelvis")	
+	self.puppet.animstate:OverrideSymbol("foot", build, "foot")	
+	self.puppet.animstate:OverrideSymbol("torso", titsbuild, "torso")
+	
+	local headbuild = prefab
+	self.puppet.animstate:OverrideSymbol("head", headbuild, "head")
+	self.puppet.animstate:OverrideSymbol("headbase", headbuild, "headbase")
+	self.puppet.animstate:OverrideSymbol("headbase_hat", headbuild, "headbase_hat")
+	self.puppet.animstate:OverrideSymbol("cheeks", headbuild, "cheeks")
+	self.puppet.animstate:OverrideSymbol("face", headbuild, "face")
+	self.puppet.animstate:OverrideSymbol("face_sail", headbuild, "face_sail")
+	self.puppet.animstate:OverrideSymbol("hair", headbuild, "hair")
+	self.puppet.animstate:OverrideSymbol("hair_hat", headbuild, "hair_hat")
+	self.puppet.animstate:OverrideSymbol("hairfront", headbuild, "hairfront")	
+	self.puppet.animstate:OverrideSymbol("hairpigtails", headbuild, "hairpigtails")
+	
+	if skipanimchange == nil then
+		if self.dick_disguise == "" then
+	        self.puppet.animstate:PlayAnimation("fap_loop_girl_new_new", true)
+		    self.puppet.animstate:ClearOverrideSymbol("dick")
+	    else
+	        self.puppet.animstate:OverrideSymbol("dick", self.dick_disguise, "dick")
+	        self.puppet.animstate:PlayAnimation("fap_loop_new_new", true)
+	    end	
+	end
+end
+
+function LewdDialog:StartDisguise()
+    self.tint_dis = {r = 1, g = 1, b = 1}
+	self.selected_disguise = ""
+	self.nude_build_disguise = GetNudeBuild(ThePlayer.prefab)
+	if GetGenderStrings(ThePlayer.prefab) == "FEMALE" then
+	    self.dick_disguise = "none"
+		self.tits_disguise = GetDefaultTitsSize(ThePlayer.prefab)
+	else
+	    self.dick_disguise = GetDefaultDick(ThePlayer.prefab, self.base_skin)
+		self.tits_disguise = ""
+	end	
+	
+	self.tits_text:Hide()
+	self.dick_text:Hide()
+	self.nude_text:Hide()
+	self.nude_custom:Hide()
+	self.dick_ui:Hide()
+	self.done_btn:Hide()
+	self.tits_ui:Hide()
+	
+	CharsList = GetActiveCharacterList()
+	
+	local button = {{text = "Done", cb = function() 
+         self:Done()
+	end}}
+	
+		local tintnumbers = {}
+	for i = 0, 255, 1 do
+	    table.insert(tintnumbers, {text = i, data = i / 255})
+	end
+	local tintY = 35
+	self.tint_r_dis = self.root:AddChild(CreateTextSpinner("Tint", tintnumbers))
+	self.tint_r_dis:SetPosition(325, tintY)
+	self.tint_r_dis:SetSelectedIndex(256)
+	self.tint_r_dis.OnChanged = function( _, data )
+		self.tint_dis.r = data
+		self:ApplyDisguise(self.selected_disguise, true)
+	end
+	self.tint_r_field_dis = self:CreateTextBox(325, tintY, self.tint_r_dis)
+	self.tint_g_dis = self.root:AddChild(CreateTextSpinner("Tint", tintnumbers))
+	self.tint_g_dis:SetPosition(325, tintY-30)
+	self.tint_g_dis:SetSelectedIndex(256)
+    self.tint_g_dis.OnChanged = function( _, data )
+		self.tint_dis.g = data
+		self:ApplyDisguise(self.selected_disguise, true)
+	end
+	self.tint_g_field_dis = self:CreateTextBox(325, tintY-30, self.tint_g_dis)
+	self.tint_b_dis  = self.root:AddChild(CreateTextSpinner("Tint", tintnumbers))
+	self.tint_b_dis :SetPosition(325, tintY-60)
+	self.tint_b_dis :SetSelectedIndex(256)
+	self.tint_b_dis .OnChanged = function( _, data )
+		self.tint_dis.b = data
+		self:ApplyDisguise(self.selected_disguise, true)
+	end
+	self.tint_b_field_dis = self:CreateTextBox(325, tintY-60, self.tint_b_dis)
+	self.done2_btn = self.root:AddChild(Menu(button, 0, false, "carny_xlong", nil, 30))
+	self.done2_btn:SetPosition(150, -175)
+	self.disguise_text = self.root:AddChild(Text(TITLEFONT, 34, "Disguise as"))
+	self.disguise_text:SetPosition(-75, 100)
+	local SpinerData = GetPossibleDisguiseCandiates()
+	self.dick_ui_disguise = self.root:AddChild(CreateTextSpinner("Dick", { 
+	{ text = "None", data = "" },
+	{ text = "White", data = "white_dick" },
+	{ text = "Brown", data = "walter_dick" },
+	{ text = "Gray", data = "warly_dick" },
+	{ text = "Robo", data = "wx78_dick" },
+	{ text = "Spider", data = "webber_dick" },
+	{ text = "Spider White", data = "webber_dick_white" },
+	{ text = "Spider Brown", data = "webber_dick_brown" },
+	{ text = "Plant", data = "wormla_dick" },
+	{ text = "Red", data = "wortox_dick" } }))
+	self.dick_ui_disguise:SetPosition(325, -100)
+	self.dick_ui_disguise.OnChanged = function( _, data )
+	    self.dick_disguise = data
+		self:ApplyDisguise(self.selected_disguise)
+	end
+	
+	self.nude_custom_disguise = self.root:AddChild(CreateTextSpinner("Nude skin", self.nudebuildoptions))
+    self.nude_custom_disguise:SetPosition(-75, 0)	
+	self.nude_custom_disguise.OnChanged = function( _, data )
+		self.nude_build_disguise = data
+		if data == "male_nude" then
+		    self.tits_disguise = "none"
+		end
+		if CanChangeBoobsSize(self.nude_build_disguise) == false then
+		    self.tits_disguise = "none"
+		end
+		if data == "wendy_nude" then
+		    self.tits_disguise = GetDefaultTitsSize(self.selected_disguise)
+		end
+		self:ReCreateTitsSelectDisguise()
+		self:ApplyDisguise(self.selected_disguise)
+	end
+	self:ReCreateTitsSelectDisguise()
+	self.disguise_select = self.root:AddChild(CreateTextSpinner("Disguise", SpinerData))
+    self.disguise_select:SetPosition(-75, 65)	
+	self.disguise_select.OnChanged = function( _, data )	
+		self.selected_disguise = data
+	    if GetGenderStrings(self.selected_disguise) ~= "FEMALE" then	
+	        self.dick_disguise = GetDefaultDick(self.selected_disguise)
+			self.dick_ui_disguise:SetSelectedIndex(NameToIndex[self.dick_disguise])
+		else
+	        self.dick_disguise = ""
+			self.dick_ui_disguise:SetSelectedIndex(NameToIndex[self.dick_disguise])
+	    end
+		if self.selected_disguise == "" then
+		    self.nude_build_disguise = GetNudeBuild(ThePlayer.prefab)
+		else
+		    self.nude_build_disguise = GetNudeBuild(self.selected_disguise)
+		end
+		self.nude_custom_disguise:SetSelectedIndex(NameToIndex[self.nude_build_disguise])
+		if self.nude_build_disguise == "male_nude" then
+		    self.tits_disguise = "none"
+		end
+		if CanChangeBoobsSize(self.nude_build_disguise) == false then
+		    self.tits_disguise = "none"
+		end
+		if self.nude_build_disguise == "wendy_nude" then
+		    self.tits_disguise = GetDefaultTitsSize(self.selected_disguise)
+		end
+		self:ReCreateTitsSelectDisguise()		
+		self:ApplyDisguise(data)
+	end
+	self:ApplyDisguise(self.selected_disguise)
+	self.tint_r:Hide()
+	self.tint_g:Hide()
+	self.tint_b:Hide()
+	self.tint_text:Hide()
+	self.tint_r_field.done_btn:Hide()
+	self.tint_g_field.done_btn:Hide()
+	self.tint_b_field.done_btn:Hide()
+	
+end
+
+function LewdDialog:CreateTextBox(x, y, spiner)
+    local textentry_width = 180
+	local textentry_height = 30
+	local textentry = self.root:AddChild(TEMPLATES.StandardSingleLineTextEntry(nil, textentry_width, textentry_height, NEWFONT, 18, ""))
+	textentry.editmode = false
+	textentry:SetPosition(x, y)
+    --textentry.changed_image = textentry:AddChild(Image("images/global_redux.xml", "option_highlight.tex"))
+    --textentry.changed_image:SetPosition(0, 0)
+    --textentry.changed_image:ScaleToSizeIgnoreParent(textentry_width + 28, 50)
+    --textentry.changed_image:MoveToBack()
+    --textentry.changed_image:SetClickable(false)
+    --textentry.changed_image:SetTint(1,1,1,0.3)
+	textentry.done_btn = self.root:AddChild(TEMPLATES.StandardButton(nil, "Modify", {50, 30}))
+	local onclick = function()
+	    if textentry.editmode then
+		    textentry.editmode = false
+		else
+		    textentry.editmode = true
+		end
+		
+		if textentry.editmode then
+		    textentry.done_btn:SetText("Apply")
+			textentry:Show()
+			spiner:Hide()
+			spiner:Hide()
+			textentry.textbox:SetString(spiner:GetText())
+		else
+		    textentry.done_btn:SetText("Modify")
+			spiner:Show()
+			textentry:Hide()
+			local num = tonumber(textentry.textbox:GetString())
+			if num then
+			    num = num+1
+				if num < 1 then
+				    num = 1
+				else
+				    if num > 256 then
+					    num = 256
+					end
+				end
+			else
+			    num = 256
+			end
+			local setnum = num-1
+			spiner:SetSelectedIndex(num)
+			spiner.OnChanged(nil, setnum/255)
+		end
+	end
+	
+	textentry.done_btn:SetOnClick(onclick)
+	textentry.done_btn:SetPosition(x+130, y)
+	textentry:Hide()
+	return textentry
+end
+
 function LewdDialog:StartEdit()
     self.title:SetString("Character edit")
 	self.text:Kill()
 	self.continue_btn:Kill()
 	self.skip_btn:Kill()
 	self.puppet:Show()
+	
+	self.tint = {r = 1, g = 1, b = 1}
 	
     self.tits_text = self.root:AddChild(Text(TITLEFONT, 34, "Tits Size"))
 	self.tits_text:SetPosition(-75, -65)
@@ -220,14 +551,7 @@ function LewdDialog:StartEdit()
     self.nude_text = self.root:AddChild(Text(TITLEFONT, 34, "Nude skin"))
 	self.nude_text:SetPosition(-75, 35)	
 	
-	self.nude_custom = self.root:AddChild(CreateTextSpinner("Nude skin", { 
-	{ text = "None", data = "" }, 
-	{ text = "White female", data = "wendy_nude" }, 
-	{ text = "White male", data = "male_nude" },
-    { text = "Tan male", data = "male_nude_brown" },	
-	{ text = "Tan female", data = "wanda_nude" },
-	{ text = "Gray male", data = "male_nude_gray" },
-	{ text = "Plant tiddy", data = "wormla_nude" } }))
+	self.nude_custom = self.root:AddChild(CreateTextSpinner("Nude skin", self.nudebuildoptions))
     self.nude_custom:SetPosition(-75, 0)	
 	self.nude_custom.OnChanged = function( _, data )
 		self.nude_build = data
@@ -268,13 +592,51 @@ function LewdDialog:StartEdit()
 	    self.dick = data
 		self:SetNude()
 	end
+	self.dick_ui.OnChanged = function( _, data )
+	    self.dick = data
+		self:SetNude()
+	end
 	--print("Dick "..self.dick)
 	--print("Dick to index "..NameToIndex[self.dick])
 	self.dick_ui:SetSelectedIndex(NameToIndex[self.dick])
 	
+	local tintnumbers = {}
+	for i = 0, 255, 1 do
+	    table.insert(tintnumbers, {text = i, data = i / 255})
+	end
+	local tintY = 35
+	self.tint_r = self.root:AddChild(CreateTextSpinner("Tint", tintnumbers))
+	self.tint_r:SetPosition(325, tintY)
+	self.tint_r:SetSelectedIndex(256)
+	self.tint_r.OnChanged = function( _, data)
+		self.tint.r = data
+		self:SetNude(true)
+	end
+	self.tint_r_field = self:CreateTextBox(325, tintY, self.tint_r)
+	self.tint_g = self.root:AddChild(CreateTextSpinner("Tint", tintnumbers))
+	self.tint_g:SetPosition(325, tintY-30)
+	self.tint_g:SetSelectedIndex(256)
+    self.tint_g.OnChanged = function( _, data )
+		self.tint.g = data
+		self:SetNude(true)
+	end
+	self.tint_g_field = self:CreateTextBox(325, tintY-30, self.tint_g)
+	self.tint_b = self.root:AddChild(CreateTextSpinner("Tint", tintnumbers))
+	self.tint_b:SetPosition(325, tintY-60)
+	self.tint_b:SetSelectedIndex(256)
+	self.tint_b.OnChanged = function( _, data )
+		self.tint.b = data
+		self:SetNude(true)
+	end
+	self.tint_b_field = self:CreateTextBox(325, tintY-60, self.tint_b)
+	self.tint_text = self.root:AddChild(Text(TITLEFONT, 34, "Custom Color"))
+	self.tint_text:SetPosition(325, tintY+35)
+	
+	
 	self:SetNude()
-    local button = {{text = "Done", cb = function() 
-         self:Done()
+    local button = {{text = "Next", cb = function() 
+         --self:Done()
+		 self:StartDisguise()
 	end}}
 	
     self.done_btn = self.root:AddChild(Menu(button, 0, false, "carny_xlong", nil, 30))
@@ -295,7 +657,7 @@ function LewdDialog:DoNext()
 	elseif d == 5 then
 	    self.text:SetString("Also some moneters like a bunnymans and pigmans you can feed with food to have frienly sex with thems.")
 	elseif d == 6 then
-	    self.text:SetString("Here is tutorial is over, Now if you want you can change your character if you want.")
+	    self.text:SetString("Here is tutorial is over, Now if you want you can edit your character if you want.")
 	elseif d == 7 then
 	    self:StartEdit()
 	end
@@ -317,20 +679,76 @@ function LewdDialog:SetTits(tits)
 	puppet.animstate:OverrideSymbol("torso", build, "torso")
 end
 
-function LewdDialog:SetNude()
+function LewdDialog:SetSymbolTint(symbol)
+	local tint = self.tint
+	if self.nude_build == "" then
+	    tint = {r = 1, g = 1, b = 1}
+	end
+	self.puppet.animstate:SetSymbolMultColour(symbol, tint.r, tint.g, tint.b, 1)
+end
+
+function LewdDialog:SetSymbolTintDis(symbol)
+	local tint = self.tint_dis
+	if self.selected_disguise == "" then
+	    self:SetSymbolTint(symbol)
+		return
+	end
+	self.puppet.animstate:SetSymbolMultColour(symbol, tint.r, tint.g, tint.b, 1)
+end
+
+function LewdDialog:SetNude(skipanimchange)
     local puppet = self.puppet
-	
-	if self.dick == "none" then
-	    puppet.animstate:PlayAnimation("fap_loop_girl_new_new", true)
-		self.puppet.animstate:ClearOverrideSymbol("dick")
-	else
-	    puppet.animstate:OverrideSymbol("dick", self.dick, "dick")
-	    puppet.animstate:PlayAnimation("fap_loop_new_new", true)
+	self:SetSymbolTint("arm_upper_skin")
+	self:SetSymbolTint("arm_upper")
+	self:SetSymbolTint("hand")
+	self:SetSymbolTint("arm_lower")
+	self:SetSymbolTint("arm_lower_cuff")
+	self:SetSymbolTint("leg")
+	self:SetSymbolTint("torso")
+	self:SetSymbolTint("torso_pelvis")
+	self:SetSymbolTint("foot")
+	self:SetSymbolTint("dick")
+	if skipanimchange == nil then
+		if self.dick == "none" then
+	        puppet.animstate:PlayAnimation("fap_loop_girl_new_new", true)
+		    self.puppet.animstate:ClearOverrideSymbol("dick")
+	    else
+	        puppet.animstate:OverrideSymbol("dick", self.dick, "dick")
+	        puppet.animstate:PlayAnimation("fap_loop_new_new", true)
+	    end
 	end
 	
 	if self.nude_build == "" then -- If already originaly naked characters stop here.
 	    self.puppet:SetSkins(ThePlayer.prefab, self.base_skin, {}, true)
+		self.tint_r:Hide()
+		self.tint_g:Hide()
+		self.tint_b:Hide()
+		self.tint_text:Hide()
+		self.tint_r_field:Hide()
+		self.tint_g_field:Hide()
+		self.tint_b_field:Hide()
+		self.tint_r_field.done_btn:Hide()
+		self.tint_g_field.done_btn:Hide()
+		self.tint_b_field.done_btn:Hide()
 	    return false
+	end
+	if self.tint_dis == nil then
+	    self.tint_r:Show()
+	    self.tint_g:Show()
+	    self.tint_b:Show()
+		if self.tint_r_field.editmode then
+		    self.tint_r_field:Show()
+		end
+		if self.tint_g_field.editmode then
+		    self.tint_g_field:Show()
+		end
+		if self.tint_b_field.editmode then
+		    self.tint_b_field:Show()
+		end
+		self.tint_r_field.done_btn:Show()
+		self.tint_g_field.done_btn:Show()
+		self.tint_b_field.done_btn:Show()
+	    self.tint_text:Show()
 	end
 	
 	self:SetTits(self.tits)
@@ -351,7 +769,13 @@ function LewdDialog:Done()
 	-- print("Tits "..self.tits)	
 	-- print("Dick "..self.dick)
 	-- print("Nude skin "..self.nude_build)
-	SendModRPCToServer(MOD_RPC["LEWD"]["SPAWNED"], ThePlayer, self.tits, self.dick, self.nude_build)
+	SendModRPCToServer(MOD_RPC["LEWD"]["SPAWNED"], ThePlayer, self.tits, self.dick, self.nude_build, self.selected_disguise, self.dick_disguise, self.nude_build_disguise, self.tits_disguise, 
+	self.tint.r, 
+	self.tint.g,
+	self.tint.b,
+	self.tint_dis.r,
+	self.tint_dis.g,
+	self.tint_dis.b)
     TheInput:CacheController()
 	self.active = false 
 	TheFrontEnd:PopScreen(self)

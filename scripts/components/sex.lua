@@ -1,5 +1,7 @@
 local Sex = Class(function(self, inst)
     self.inst = inst
+	self.temp = 0
+	self.tempmax = 0
 end)
 
 local function MakeFuckBar(player, mode)
@@ -29,11 +31,29 @@ local function StarFuck(layar, fucker, lewdtype, swap)
 		layar.AnimState:ClearOverrideSymbol("dick_other")
 		RemoveCensore(fucker)
 		RemoveCensore(layar)
+		layar:PushEvent("EnterInFuck")
+		fucker:PushEvent("EnterInFuck")
 		if fucker.components.naked:IsHasDick() then		
-			layar.AnimState:OverrideSymbol("dick_other", fucker.components.naked.dick, "dick")
+			if #fucker.components.naked.legs_disguise ~= 0 and fucker.components.naked.legs_disguise[#self.legs_disguise].dick ~= "" then
+			    layar.AnimState:OverrideSymbol("dick_other", fucker.components.naked.legs_disguise[#self.legs_disguise].dick, "dick")
+				local tint = fucker.components.naked.legs_disguise[#self.legs_disguise].tint
+				layar.AnimState:SetSymbolMultColour("dick_other", tint.r, tint.g, tint.b, 1)
+			else
+			    layar.AnimState:OverrideSymbol("dick_other", fucker.components.naked.dick, "dick")
+				local tint = fucker.components.naked.nude_tint
+				layar.AnimState:SetSymbolMultColour("dick_other", tint.r, tint.g, tint.b, 1)
+			end
 		end
 		if layar.components.naked:IsHasDick() then		
-			fucker.AnimState:OverrideSymbol("dick_other", layar.components.naked.dick, "dick")
+			if #layar.components.naked.legs_disguise ~= 0 and layar.components.naked.legs_disguise[#self.legs_disguise].dick ~= "" then
+			    fucker.AnimState:OverrideSymbol("dick_other", layar.components.naked.legs_disguise[#self.legs_disguise].dick, "dick")
+				local tint = layar.components.naked.legs_disguise[#self.legs_disguise].tint
+				fucker.AnimState:SetSymbolMultColour("dick_other", tint.r, tint.g, tint.b, 1)
+			else
+			    fucker.AnimState:OverrideSymbol("dick_other", layar.components.naked.dick, "dick")
+				local tint = layar.components.naked.nude_tint
+				fucker.AnimState:SetSymbolMultColour("dick_other", tint.r, tint.g, tint.b, 1)
+			end
 		end
 		if lewdtype == "sex" then
 		    fucker.sg:GoToState("riderfuck_state")
@@ -60,8 +80,8 @@ local function StarFuck(layar, fucker, lewdtype, swap)
 		elseif lewdtype == "doggy" then
 		    fucker.sg:GoToState("doggy")
 			layar.sg:GoToState("doggy_girl")
-			
-			
+
+	
 			local fuckmode = fucker.components.naked:CheckSexGender()
             local bottom = layar			
 			
@@ -72,6 +92,12 @@ local function StarFuck(layar, fucker, lewdtype, swap)
             bottom.AnimState:SetLayer(LAYER_BACKGROUND)
 			bottom.components.cumattachable:ChangeLayer(LAYER_BACKGROUND)
             bottom.AnimState:SetSortOrder(5)		
+		elseif lewdtype == "handjob" then
+		    fucker.sg:GoToState("handjob_girl")
+			layar.sg:GoToState("handjob")	
+            layar.AnimState:SetLayer(LAYER_BACKGROUND)
+			layar.components.cumattachable:ChangeLayer(LAYER_BACKGROUND)
+            layar.AnimState:SetSortOrder(5)			
 		end
 		if layar:HasTag("CHARLIEBITCH") then
 		    MakeFuckBar(fucker, "Charlie")
@@ -86,8 +112,8 @@ local function TryDoWithPartner(layar, fucker, lewdtype, swap)
 			fucker.poseswap = true
 			StarFuck(layar, fucker, lewdtype, swap)
 	    else
-		    if (layar.sg:HasStateTag("knockout") or layar.sg:HasStateTag("bedroll") or layar:HasTag("CHARLIEBITCH")) and layar:GetDistanceSqToInst(fucker) < 7 then
-			    StarFuck(layar, fucker, lewdtype, swap)
+			if (layar.sg:HasStateTag("knockout") or layar.sg:HasStateTag("bedroll") or layar:HasTag("CHARLIEBITCH") or layar:HasTag("PLAYERALIKE")) and layar:GetDistanceSqToInst(fucker) < 7 then
+				StarFuck(layar, fucker, lewdtype, swap)
 			end
 	    end
 	end
@@ -218,13 +244,28 @@ function Sex:FlipFuck(inst, target, swap)
 	return true
 end
 
+function Sex:Handjob(inst, target, swap)
+    TryDoWithPartner(target, inst, "handjob", swap)  
+	return true
+end
+
+function Sex:HandjobNoCheck(inst, target, swap)
+    StarFuck(target, inst, "handjob", swap)
+	return true
+end
+
 function Sex:FuckOnKness(inst, target, swap)
     TryDoWithPartner(target, inst, "onkness", swap)  
 	return true
 end
 
 function Sex:FuckDoggy(inst, target, swap)
-    TryDoWithPartner(target, inst, "doggy", swap)  
+	TryDoWithPartner(target, inst, "doggy", swap)  
+	return true
+end
+
+function Sex:FuckCrabbyMommy(target, inst)
+	StarFuck(target, inst, "doggy", false)  
 	return true
 end
 
@@ -260,6 +301,30 @@ end
 function Sex:FuckObject(player, object)
     MonsterTryFuckPlayer(player, object, true, true)
 	return true
+end
+
+function Sex:CumAnim(toggle)
+    if toggle then
+	    self.inst.AnimState:OverrideSymbol("cumanim", "cumanim", "cumanim")
+		self.inst.AnimState:OverrideSymbol("cumanim2", "cumanim", "cumanim")
+	else
+		self.inst.AnimState:ClearOverrideSymbol("cumanim")
+		self.inst.AnimState:ClearOverrideSymbol("cumanim2")
+	end
+end
+
+function Sex:SetTempMax(maxval)
+    self.tempmax = maxval
+	if self.temp > self.tempmax then
+	    self.temp = self.tempmax
+	end
+end
+
+function Sex:SetTemp(val)
+    self.temp = val
+	if self.inst.partner and self.inst.partner.components.sex then
+	    self.inst.partner.components.sex.temp = val
+	end
 end
 
 return Sex

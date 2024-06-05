@@ -120,3 +120,73 @@ GLOBAL.GetNudeBuild = function(prefab)
 		end
 	end
 end
+
+GLOBAL.GetNudeBuildOptions = function(not_include_none)
+    local array = {}
+	if not_include_none == nil or not_include_none == false then
+	    table.insert(array, { text = "None", data = "" })
+	end
+	table.insert(array, { text = "White female", data = "wendy_nude" })
+	table.insert(array, { text = "White male", data = "male_nude" })
+    table.insert(array, { text = "Tan male", data = "male_nude_brown" })	
+	table.insert(array, { text = "Tan female", data = "wanda_nude" })
+	table.insert(array, { text = "Gray male", data = "male_nude_gray" })
+	table.insert(array, { text = "Plant tiddy", data = "wormla_nude" })
+	return array
+end
+
+GLOBAL.GetPossibleDisguiseCandiates = function(not_include_none)
+    local CharsList = GetActiveCharacterList()
+	local data = {}
+	if not_include_none == nil or not_include_none == false then
+	    table.insert(data, { text = "None", data = "" })
+	end
+	for x = 1,#CharsList,1 do
+	    if CharsList[x] ~= nil and IsCharacterOwned(CharsList[x]) then
+			table.insert(data, { text = STRINGS.NAMES[string.upper(CharsList[x])], data = CharsList[x]})
+		end
+	end
+	return data
+end
+
+
+GLOBAL.VoiceReferenceTable = {}
+--print(GetReferenceVoiceData("willow").voicename)
+--print(GetReferenceVoiceData("wormla").voicename)
+GLOBAL.GetReferenceVoiceData = function(prefab) 
+    if #GLOBAL.VoiceReferenceTable == 0 then
+	    GLOBAL.RegisterVoiceReferenceTable()
+	end
+	for x = 1,#GLOBAL.VoiceReferenceTable,1 do
+	    local VoiceData = GLOBAL.VoiceReferenceTable[x] 
+		if VoiceData ~= nil then
+		    if prefab == VoiceData.prefabname then
+			    return VoiceData
+			end
+		end
+	end
+	return nil
+end
+
+GLOBAL.RegisterVoiceReferenceTable = function()  
+    local CharsList = GetActiveCharacterList()
+	for x = 1,#CharsList,1 do
+	    local prefab = CharsList[x] 
+		if prefab ~= nil then
+		    local Char = GLOBAL.SpawnPrefab(prefab)
+			if Char ~= nil then	
+   			    local voice = Char.soundsname
+   				local font = nil
+				local talkeroverride = Char.talker_path_override
+   				if Char.components.talker then
+   				    font = Char.components.talker.font
+   				end
+		        if voice == nil then
+		           voice = prefab
+		        end
+   				table.insert(GLOBAL.VoiceReferenceTable, { prefabname = prefab, voicename = voice, fontname = font, pathoverride = talkeroverride, customidle = Char.customidleanim })
+   				Char:Remove()				
+			end
+		end
+	end
+end
