@@ -180,6 +180,7 @@ NameToIndex["male_nude_brown"] = 4
 NameToIndex["wanda_nude"] = 5
 NameToIndex["male_nude_gray"] = 6
 NameToIndex["wormla_nude"] = 7
+NameToIndex["whisky_nude"] = 8
 
 function LewdDialog:ReCreateTitsSelect()
 	if self.tits_ui ~= nil then

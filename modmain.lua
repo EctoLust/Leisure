@@ -86,7 +86,7 @@ Assets =
 	Asset("ANIM", "anim/male_nude_gray.zip"),
 	Asset("ANIM", "anim/wormla_nude.zip"),
 	Asset("ANIM", "anim/wanda_nude.zip"),
-	
+	Asset("ANIM", "anim/whisky_nude.zip"),
 	-- Ui
 	Asset("ANIM", "anim/CharlieUi.zip"),
 	Asset("ANIM", "anim/lube_bage.zip"),

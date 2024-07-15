@@ -17,6 +17,13 @@ GLOBAL.GetGenderStrings = function(charactername)
     return "DEFAULT"
 end
 
+local function AddCustomLewdCharacter(prefab, nude_build)
+
+end
+
+--AddCustomLewdCharacter("wurt", "",)
+--AddCustomLewdCharacter("wendy", "wendy_nude",)
+
 GLOBAL.GetDefaultTitsSize = function(prefab)
     -- This function set default tits size for editor
     if prefab == "wurt" then
@@ -39,7 +46,10 @@ GLOBAL.GetTitsBySize = function(prefab, tits)
 	end
     if prefab == "wanda" then
 	    return "wanda_nude"
-	end	
+	end
+	if prefab == "whisky" then
+	    return "whisky_nude"
+	end
 
 	if tits == "flat" then
 	    return "wendy_nude"
@@ -57,7 +67,7 @@ GLOBAL.GetTitsBySize = function(prefab, tits)
 end
 
 GLOBAL.HaveSeparatedTits = function(build)
-    if build == "small_nude" or build == "willow_nude" or build == "large_nude" or build == "wormla_nude" or build == "wanda_nude" then
+    if build == "small_nude" or build == "willow_nude" or build == "large_nude" or build == "wormla_nude" or build == "wanda_nude" or build == "whisky_nude" then
 	    return true
 	else
 	    return false
@@ -102,7 +112,10 @@ GLOBAL.GetNudeBuild = function(prefab)
 	end
 	if prefab == "wanda" then
 	    return "wanda_nude"
-	end	
+	end
+	if prefab == "whisky" then
+	    return "whisky_nude"
+	end
 	
 	if prefab == "webber" or prefab == "wx78" or prefab == "wortox" or prefab == "wormwood" or prefab == "wurt" then
 	    return ""
@@ -132,6 +145,7 @@ GLOBAL.GetNudeBuildOptions = function(not_include_none)
 	table.insert(array, { text = "Tan female", data = "wanda_nude" })
 	table.insert(array, { text = "Gray male", data = "male_nude_gray" })
 	table.insert(array, { text = "Plant tiddy", data = "wormla_nude" })
+	table.insert(array, { text = "Whisky tiddy", data = "whisky_nude" })
 	return array
 end
 

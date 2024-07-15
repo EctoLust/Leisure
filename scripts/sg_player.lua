@@ -1218,7 +1218,7 @@ local function AddMonsterFuckSG(sg, sgname, alt, drop)
 			    if alt == "player_fuck_spiderslut" or alt == "spiderslut_fuck_player" then
 			        alt = "spiderslut_fuck_player_fem"
 			    end
-			end			
+			end		
 			
 			inst.AnimState:PlayAnimation(alt, true)
 			inst.fuckanim_client:set(alt)

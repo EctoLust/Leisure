@@ -168,6 +168,9 @@ function Naked:SetBuildForSymbol(symbol)
 		end
 		
 		if build ~= nil and build ~= "" then
+		    if tint == nil then
+			    tint = {r = 1, g = 1, b = 1}
+			end
 		    self.inst.AnimState:OverrideSymbol(symbol, build, symbol)
 			self.inst.AnimState:SetSymbolMultColour(symbol, tint.r, tint.g, tint.b, 1)
 		end
@@ -547,11 +550,16 @@ function Naked:SetTits()
 		    if #self.body_disguise ~= 0 then
 	            self.inst.AnimState:OverrideSymbol("torso", self.body_disguise[#self.body_disguise].tits, "torso")
 			    self.inst.AnimState:OverrideSymbol("torso_wide", self.body_disguise[#self.body_disguise].tits, "torso_wide")
-				tint = self.body_disguise[#self.body_disguise].tint
+				if self.body_disguise[#self.body_disguise].tint then
+				   tint = self.body_disguise[#self.body_disguise].tint
+				end
+				
 		    else
 		        self.inst.AnimState:OverrideSymbol("torso", self.tits_build, "torso")
 			    self.inst.AnimState:OverrideSymbol("torso_wide", self.tits_build, "torso_wide") 
-				tint = self.nude_tint
+				if self.nude_tint then
+				    tint = self.nude_tint
+				end
 	        end
 	    end
 	end
