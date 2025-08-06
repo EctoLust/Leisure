@@ -18,7 +18,7 @@ This just parody mod!**
 Ecto - Codding, Animating, Images and sprites editing.
 
 # Our discord server
-[Discord server where you can group up with people to play with.](https://discord.gg/6xjXGNnDCw).
+[Discord server where you can group up with people to play with](https://discord.gg/6xjXGNnDCw)
 
 
 
