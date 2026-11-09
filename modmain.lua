@@ -183,9 +183,18 @@ local EventHandler = GLOBAL.EventHandler
 local ACTIONS = GLOBAL.ACTIONS
 local FRAMES = GLOBAL.FRAMES
 
+
 local VoteUtil = GLOBAL.require("voteutil")
 local UserCommands = GLOBAL.require("usercommands")
 
+-- Strict-safe placeholder function to prevent Rock Lobster crash
+if env and env.AddComponentPostInit then
+    env.AddComponentPostInit("combat", function(self)
+        if self.SetHitArc == nil then
+            self.SetHitArc = function() end
+        end
+    end)
+end
 -- Config data
 TUNING.TUTORIAL_SKIP = GetModConfigData("tutorial_skip")
 TUNING.SHADOWHANDS_SPAWN = GetModConfigData("shadow_spawn")
@@ -346,16 +355,17 @@ local function StopMonsterFuck(inst)
 
 	inst:DoTaskInTime(0.1, function()
 	if inst.sg:HasStateTag("fuck") and not inst.sg:HasStateTag("dead") then
+	    -- Bypassing both stun tracks to send the player straight to idle
 	    if inst:HasTag("FallAfterFuck") then
-	        inst.sg:GoToState("knockback")
-			inst:RemoveTag("FallAfterFuck")
-		elseif inst:HasTag("WakeupOnFuckEnd") then
-		    inst.sg:GoToState("wakeup")
-			inst:RemoveTag("WakeupOnFuckEnd")
-	    else
-	        inst.sg:GoToState("idle")
+	        inst:RemoveTag("FallAfterFuck")
 	    end
-	end --
+	    if inst:HasTag("WakeupOnFuckEnd") then
+	        inst:RemoveTag("WakeupOnFuckEnd")
+	    end
+	    
+	    -- Clear the busy status tags immediately and return movement controls
+	    inst.sg:GoToState("idle")
+	end 
 	end)
     if inst.partner then
         inst:DoTaskInTime(0.1, 

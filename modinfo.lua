@@ -1,4 +1,4 @@
-name = " A Leisure mod"
+name = " A Leisure mod - FIXED"
 version = "0.36 OPENSOURCE EDITION, Disguise, Tint"
 description = "Mod to get some rest.\nVersion "..version
 author = "Ecto"
