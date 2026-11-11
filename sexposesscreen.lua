@@ -129,13 +129,18 @@ function SexPoseScreen:DoRPCMonster(pose)
 	self:closemenu()
 end
 
+-- STEAM DECK COMPATIBILITY PLUG: Prevents componentactions.lua from hitting a nil value
+function SexPoseScreen:GetResolutionScaling()
+    return SexPoseScreen._base.GetResolutionScaling(self)
+end
+
 function SexPoseScreen:OnControl(control, down)
     if SexPoseScreen._base.OnControl(self, control, down) then
         return true
     end
 
     -- FIXED HARDWARE CONTROLLER ACTION CAPTURE
-    if down and (control == 0 or control == 1) then -- 0 is Accept/A, 1 is Primary/Action
+    if down and (control == 0 or control == 1) then -- Keep your exact functional mappings
         -- Check primary menu buttons
         if self.menu and self.menu.items then
             for i, item in ipairs(self.menu.items) do

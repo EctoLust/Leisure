@@ -17,10 +17,13 @@ local suck_state = State{
             inst.components.locomotor:Stop()
             inst.components.locomotor:Clear()
 			inst:ClearBufferedAction()
-			local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-			if hands_item ~= nil then
-			    inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
-			    inst.components.inventory:DropItem(hands_item)
+			-- HARDWARE SAFE: Protect against missing inventory components on NPCs
+			if inst.components.inventory then
+				local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+				if hands_item ~= nil then
+					inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
+					inst.components.inventory:DropItem(hands_item)
+				end
 			end
 			inst.AnimState:PlayAnimation("girl_pre")
 			inst.AnimState:PushAnimation("girl_loop", true)
@@ -51,10 +54,13 @@ local lick_state = State{
             inst.components.locomotor:Stop()
             inst.components.locomotor:Clear()
 			inst:ClearBufferedAction()
-			local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-			if hands_item ~= nil then
-			    inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
-			    inst.components.inventory:DropItem(hands_item)
+			-- HARDWARE SAFE: Protect against missing inventory components on NPCs
+			if inst.components.inventory then
+				local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+				if hands_item ~= nil then
+					inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
+					inst.components.inventory:DropItem(hands_item)
+				end
 			end
 			inst.AnimState:PlayAnimation("girl_pre")
 			inst.AnimState:PushAnimation("girl_lick", true)
@@ -85,11 +91,14 @@ local suckenjoy_state = State{
             inst.components.locomotor:Stop()
             inst.components.locomotor:Clear()
 			inst:ClearBufferedAction()
-			local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-			if hands_item ~= nil then
-			    inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
-			    inst.components.inventory:DropItem(hands_item)
-			end 
+			-- HARDWARE SAFE: Protect against missing inventory components on NPCs
+			if inst.components.inventory then
+				local hands_item = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+				if hands_item ~= nil then
+					inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.HANDS, false)
+					inst.components.inventory:DropItem(hands_item)
+				end 
+			end
 			inst.AnimState:PlayAnimation("body_pre")
 			inst.AnimState:PushAnimation("body_loop", true)
         end,
@@ -696,6 +705,8 @@ local takeoff_legs = State{
                  if inst.components.naked then
 				     inst.components.naked:TakeOffClothing("legs")
 				 end
+                 -- MASK PROTECTION
+                 if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
             end),
 		},
 
@@ -728,6 +739,8 @@ local takeoff_body = State{
                  if inst.components.naked then
 				     inst.components.naked:TakeOffClothing("body")
 				 end
+                 -- MASK PROTECTION
+                 if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
             end),
 		},
 
@@ -752,15 +765,13 @@ local takeoff_feet = State{
             inst.components.locomotor:Clear()
 			inst:ClearBufferedAction()
             inst.AnimState:PlayAnimation("pickup")
-            
         end,
 		
         timeline =
         {
             TimeEvent(17 * FRAMES, function(inst)
-                 if inst.components.naked then
-				     
-				 end
+                 -- MASK PROTECTION
+                 if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
             end),
 		},
 
@@ -770,6 +781,7 @@ local takeoff_feet = State{
                 if inst.AnimState:AnimDone() then             
 					if inst.AnimState:IsCurrentAnimation("pickup") then
 					    inst.components.naked:TakeOffClothing("feet")
+                        if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
 						inst.AnimState:PlayAnimation("pickup_pst")				
 					elseif inst.AnimState:IsCurrentAnimation("pickup_pst") then
 					    inst.sg:GoToState("idle")
@@ -798,6 +810,8 @@ local takeoff_head = State{
                  if inst.components.naked then
 				     inst.components.naked:TakeOffClothing("head")
 				 end
+                 -- MASK PROTECTION
+                 if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
             end),
 		},
 
@@ -836,11 +850,15 @@ local takeoff_all = State{
                  if inst.components.naked then
 				     inst.components.naked:TakeOffClothing("body")
 				 end
+                 -- MASK PROTECTION
+                 if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
             end),
             TimeEvent(42 * FRAMES, function(inst)
                  if inst.components.naked then
 				     inst.components.naked:TakeOffClothing("legs")
 				 end
+                 -- MASK PROTECTION
+                 if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
             end),
 		},
 
@@ -851,6 +869,8 @@ local takeoff_all = State{
 					if inst.AnimState:IsCurrentAnimation("pickup") then
 					    inst.components.naked:TakeOffClothing("feet")
 						inst.components.naked:TakeOffClothing("stockings")
+                        -- MASK PROTECTION
+                        if inst:HasTag("CHARLIEBITCH") then inst.AnimState:SetBuild("charlie_queen") end
 						inst.AnimState:PlayAnimation("pickup_pst")				
 					elseif inst.AnimState:IsCurrentAnimation("pickup_pst") then
 					    inst.sg:GoToState("idle")
