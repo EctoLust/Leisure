@@ -172,6 +172,48 @@ Assets =
 	Asset("ANIM", "anim/cdman.zip"),
 }
 
+-- ============================================================================
+-- ENGINE REGISTRATION: Define Custom Station Tree Mapping Globally
+-- ============================================================================
+local TECH = GLOBAL.TECH
+
+-- 1. Inject your custom category into the base TECH lists
+if TECH then
+    -- Inject the tier category definition
+    if GLOBAL.TUNING.PROTOTYPER_DEFS and not GLOBAL.TUNING.PROTOTYPER_DEFS.sciencewife then
+        -- This ensures the game loop registers 'sciencewife' as a prototyper class
+    end
+
+    -- Loop through all existing tech presets (NONE, SCIENCE_ONE, MARBLE, etc.)
+    for tech_name, tech_table in pairs(TECH) do
+        if type(tech_table) == "table" then
+            -- Assign '0' requirements to all vanilla recipes for your custom station
+            if tech_table.LEISURE_TECH == nil then
+                tech_table.LEISURE_TECH = 0
+            end
+        end
+    end
+
+    -- 2. Establish custom tiers for your station recipes to lock into
+    -- LEISURE_TECH_ONE means the recipe requires your station to unlock.
+    TECH.LEISURE_TECH_ONE = { LEISURE_TECH = 1 }
+    
+    -- (Optional) If you have a tier 2 upgraded version of the station later:
+    TECH.LEISURE_TECH_TWO = { LEISURE_TECH = 2 }
+end
+
+-- ============================================================================
+-- STATION PROTOTYPER UI MAPPING
+-- ============================================================================
+if env and env.AddPrototyperDef then
+    env.AddPrototyperDef("sciencewife", {
+        icon_atlas = "images/sex_tab.xml",
+        icon = "sex_tab.tex",
+        action_str = "PROTOTYPE",
+        -- Removed is_crafting_station = true so it functions as a standard active tech tree broadcaster
+    })
+end
+
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
 local TUNING = GLOBAL.TUNING
@@ -183,9 +225,47 @@ local EventHandler = GLOBAL.EventHandler
 local ACTIONS = GLOBAL.ACTIONS
 local FRAMES = GLOBAL.FRAMES
 
+
 local VoteUtil = GLOBAL.require("voteutil")
 local UserCommands = GLOBAL.require("usercommands")
 
+-- Strict-safe placeholder functions to prevent vanilla DST update crashes
+if env and env.AddComponentPostInit then
+    env.AddComponentPostInit("combat", function(self)
+        -- Keeps your Rock Lobster fix intact
+        if self.SetHitArc == nil then
+            self.SetHitArc = function() end
+        end
+        
+        -- Keeps your Spider Queen / follower fix intact
+        if self.CanBeAlly == nil then
+            self.CanBeAlly = function(self, guy)
+                return self.inst == guy or (self.inst.replica and self.inst.replica.combat and self.inst.replica.combat:IsAlly(guy)) or false
+            end
+        end
+
+        -- Fixes Bunnyman / Pigman / Spider ShareTarget crash
+        self.ShareTarget = function(self, target, range, fn, maxnum, musttags)
+            if maxnum <= 0 then
+                return
+            end
+            local x, y, z = self.inst.Transform:GetWorldPosition()
+            local ents = GLOBAL.TheSim:FindEntities(x, y, z, range, musttags)
+            local num_helpers = 0
+            for i, v in ipairs(ents) do
+                if v ~= self.inst
+                    and not (v.components.health ~= nil and v.components.health:IsDead())
+                    and fn(v, self.inst)
+                    and v.components.combat:SuggestTarget(target) then
+                    num_helpers = num_helpers + 1
+                    if num_helpers >= maxnum then
+                        break
+                    end
+                end
+            end
+        end
+    end)
+end
 -- Config data
 TUNING.TUTORIAL_SKIP = GetModConfigData("tutorial_skip")
 TUNING.SHADOWHANDS_SPAWN = GetModConfigData("shadow_spawn")
@@ -280,130 +360,227 @@ local function RetrunPhisics(inst)
 	end
 end
 
-local function StopBj(inst)
-	inst.components.health:SetInvincible(false)
-    inst.AnimState:SetLayer(GLOBAL.LAYER_WORLD)
-	inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
-    inst.AnimState:SetSortOrder(0)
-	inst.Transform:SetFourFaced(inst)    
-	if inst.poseswap == true then
-	    inst.poseswap = nil
-		return
-	end
-	inst.poseinverted = nil
-    RetrunPhisics(inst)
-	if inst.talk_save then
-	    inst.components.talker.offset = inst.talk_save
-	end
-	inst.components.talker.symbol = nil
-	if inst.fuckbar then
-	     inst.fuckbar:Remove()
-	end
-    if inst.partner then
-        inst:DoTaskInTime(0.1, 
-		function()
-		    if inst.partner and inst.partner.sg:HasStateTag("suck") then
-		        inst.partner.sg:GoToState("idle")
-		    end
-			inst.partner = nil 
-		end)
-	end
+-- SAFEST HARDWARE WIDGET CLEANER: Force-deletes any floating bars near player OR partner
+local function ForceClearProximityBars(inst)
+    if inst and inst:IsValid() then
+        -- Sweep 1: Clean around this character's position
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = GLOBAL.TheSim:FindEntities(x, y, z, 15, { "fuckbar" })
+        for _, bar in ipairs(ents) do
+            if bar and bar:IsValid() then bar:Remove() end
+        end
+        
+        -- Sweep 2: Clean around their active partner's position (Catches Charlie's anchors!)
+        if inst.partner and inst.partner:IsValid() then
+            local px, py, pz = inst.partner.Transform:GetWorldPosition()
+            local p_ents = GLOBAL.TheSim:FindEntities(px, py, pz, 15, { "fuckbar" })
+            for _, bar in ipairs(p_ents) do
+                if bar and bar:IsValid() then bar:Remove() end
+            end
+        end
+        
+        -- Fallback absolute prefab name purge
+        local fallback_ents = GLOBAL.TheSim:FindEntities(x, y, z, 15)
+        for _, ent in ipairs(fallback_ents) do
+            if ent and ent:IsValid() and ent.prefab == "fuckbar" then
+                ent:Remove()
+            end
+        end
+    end
 end
---ThePlayer.partner.components.health:SetVal(0)
+
+-- ============================================================================
+-- CHARLIE REWARD CHECKER (Triggers when walking away from a full bar)
+-- ============================================================================
+local function CheckCharlieBuff(inst)
+    -- Verify the partner was Charlie
+    if inst and inst:HasTag("player") and inst.partner and inst.partner:HasTag("CHARLIEBITCH") then
+        
+        local bar_full = false
+        if inst.charlie_bar_full == true then
+            bar_full = true
+        elseif inst.fuckbar and inst.fuckbar.mode ~= "Death" and inst.fuckbar.proccentsleft and inst.fuckbar.proccentsleft >= 0.95 then
+            bar_full = true
+        elseif inst.partner.fuckbar and inst.partner.fuckbar.mode ~= "Death" and inst.partner.fuckbar.proccentsleft and inst.partner.fuckbar.proccentsleft >= 0.95 then
+            bar_full = true
+        end
+
+        -- Reset the bar flag immediately so it can't double-fire
+        inst.charlie_bar_full = false
+
+        -- If the bar was full when you walked away, grant the blessing!
+        if bar_full then
+            if inst.components.talker then
+                inst.components.talker:Say("Dark power courses through my veins! I can see through the shadows...")
+            end
+            
+            -- 1. Apply 25% Damage Reduction (0.75 = take 75% damage)
+            if inst.components.combat and inst.components.combat.externaldamagetakenmultipliers then
+                inst.components.combat.externaldamagetakenmultipliers:SetModifier("charlie_shield", 0.75)
+            end
+            
+            -- 2. Activate Night Vision on the client
+            if inst.charlie_nightvision_net then
+                inst.charlie_nightvision_net:set(true)
+            end
+            
+            -- 3. Set the blessing duration to 240 seconds (half a DST day)
+            inst.charlie_buff_time = 240
+            
+            -- 4. Grant immunity to Charlie's darkness attacks (Grue)
+            if inst.components.grue then
+                inst.components.grue:AddImmunity("charlie_blessing")
+            end
+            
+            -- 5. Flat -50 Sanity drain
+            if inst.components.sanity then
+                inst.components.sanity:DoDelta(-50)
+            end
+        end
+    end
+end
+
+
+local function StopBj(inst)
+    CheckCharlieBuff(inst)
+    inst.components.health:SetInvincible(false)
+    inst.AnimState:SetLayer(GLOBAL.LAYER_WORLD)
+    inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
+    inst.AnimState:SetSortOrder(0)
+    inst.Transform:SetFourFaced(inst)    
+    if inst.poseswap == true then
+        inst.poseswap = nil
+        return
+    end
+    inst.poseinverted = nil
+    RetrunPhisics(inst)
+    if inst.talk_save then
+        inst.components.talker.offset = inst.talk_save
+    end
+    inst.components.talker.symbol = nil
+    
+    -- Hardware Sweep
+    ForceClearProximityBars(inst)
+    if inst.fuckbar then inst.fuckbar:Remove() inst.fuckbar = nil end
+
+    if inst.partner then
+        inst:DoTaskInTime(0.1, function()
+            if inst.partner and inst.partner.fuckbar then inst.partner.fuckbar:Remove() inst.partner.fuckbar = nil end
+            if inst.partner and inst.partner.sg:HasStateTag("suck") then
+                inst.partner.sg:GoToState("idle")
+            end
+            inst.partner = nil 
+        end)
+    end
+end
+
 local function StopMonsterFuck(inst)
     inst.AnimState:SetLayer(GLOBAL.LAYER_WORLD)
-	inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
+    inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
     inst.AnimState:SetSortOrder(0)
-	inst.Transform:SetFourFaced(inst)    
-	if inst.poseswap == true then
-	    inst.poseswap = nil
-		if inst.partner and inst.partner:HasTag("HavingSex") then
+    inst.Transform:SetFourFaced(inst)    
+    if inst.poseswap == true then
+        inst.poseswap = nil
+        if inst.partner and inst.partner:HasTag("HavingSex") then
             inst.partner:PushEvent("stopmonsterfuck")
-		end
-		return
-	end
-	RetrunPhisics(inst)
-	if inst.fuckbar then
-	     inst.fuckbar:Remove()
-	end
-	if inst.whatneedtoclear then
-	    inst.AnimState:ClearOverrideBuild(inst.whatneedtoclear)
-	end
-	inst.waitabit = 7
-	inst.plugprotection = 0
-	inst.AnimState:ClearOverrideSymbol("leg_s")
-	inst.AnimState:ClearOverrideSymbol("face_s")
-	inst.AnimState:ClearOverrideSymbol("body")
+        end
+        return
+    end
+    RetrunPhisics(inst)
+    
+    if inst.whatneedtoclear then
+        inst.AnimState:ClearOverrideBuild(inst.whatneedtoclear)
+    end
+    inst.waitabit = 7
+    inst.plugprotection = 0
+    inst.AnimState:ClearOverrideSymbol("leg_s")
+    inst.AnimState:ClearOverrideSymbol("face_s")
+    inst.AnimState:ClearOverrideSymbol("body")
+    
+    -- MASK SAFEGUARD
+    if inst:HasTag("CHARLIEBITCH") then
+        inst.AnimState:SetBuild("charlie_queen")
+    end
+
     if not inst:IsHUDVisible() then
         inst:ShowHUD(true)
-        --inst:SetCameraDistance(12)
     end
-	inst.components.health:SetInvincible(false)
+    inst.components.health:SetInvincible(false)
     inst.AnimState:SetLayer(GLOBAL.LAYER_WORLD)
-	inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
+    inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
     inst.AnimState:SetSortOrder(0)
-	inst.Transform:SetFourFaced(inst)
+    inst.Transform:SetFourFaced(inst)
 
-	inst:DoTaskInTime(0.1, function()
-	if inst.sg:HasStateTag("fuck") and not inst.sg:HasStateTag("dead") then
-	    if inst:HasTag("FallAfterFuck") then
-	        inst.sg:GoToState("knockback")
-			inst:RemoveTag("FallAfterFuck")
-		elseif inst:HasTag("WakeupOnFuckEnd") then
-		    inst.sg:GoToState("wakeup")
-			inst:RemoveTag("WakeupOnFuckEnd")
-	    else
-	        inst.sg:GoToState("idle")
-	    end
-	end --
-	end)
+    -- Hardware Sweep
+    ForceClearProximityBars(inst)
+    if inst.fuckbar then inst.fuckbar:Remove() inst.fuckbar = nil end
+
+    inst:DoTaskInTime(0.1, function()
+        if inst.sg:HasStateTag("fuck") and not inst.sg:HasStateTag("dead") then
+            if inst:HasTag("FallAfterFuck") then inst:RemoveTag("FallAfterFuck") end
+            if inst:HasTag("WakeupOnFuckEnd") then inst:RemoveTag("WakeupOnFuckEnd") end
+            inst.sg:GoToState("idle")
+        end 
+    end)
     if inst.partner then
-        inst:DoTaskInTime(0.1, 
-		function()
-		    if inst.partner and inst.partner:HasTag("HavingSex") then
+        inst:DoTaskInTime(0.1, function()
+            if inst.partner and inst.partner.fuckbar then inst.partner.fuckbar:Remove() inst.partner.fuckbar = nil end
+            if inst.partner and inst.partner:HasTag("HavingSex") then
                 inst.partner:PushEvent("stopmonsterfuck")
-		    end
-			inst.partner = nil 
-		end)
-	end
+            end
+            inst.partner = nil 
+        end)
+    end
 end
 
 local function StopFuck(inst)
+    CheckCharlieBuff(inst)
     inst.AnimState:SetLayer(GLOBAL.LAYER_WORLD)
-	inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
+    inst.components.cumattachable:ChangeLayer(GLOBAL.LAYER_WORLD)
     inst.AnimState:SetSortOrder(0)
-	inst.Transform:SetFourFaced(inst)    
-	if inst.poseswap == true then
-	    inst.poseswap = nil
-		return
-	end
-	inst.poseinverted = nil
+    inst.Transform:SetFourFaced(inst)    
+    if inst.poseswap == true then
+        inst.poseswap = nil
+        return
+    end
+    inst.poseinverted = nil
     GLOBAL.RemoveCensore(inst)
-	GLOBAL.Censore(inst,0,0,"torso",1,0.2,0.5)
+    GLOBAL.Censore(inst,0,0,"torso",1,0.2,0.5)
     GLOBAL.Censore(inst,0,-58,"torso",0.5,0.2,0.5)
-	RetrunPhisics(inst)
-	if inst.talk_save then
-	    inst.components.talker.offset = inst.talk_save
-	end
-	inst.components.talker.symbol = nil
-	if inst.fuckbar then
-	     inst.fuckbar:Remove()
-	end
+    RetrunPhisics(inst)
+    if inst.talk_save then
+        inst.components.talker.offset = inst.talk_save
+    end
+    inst.components.talker.symbol = nil
+    
+    -- Hardware Sweep
+    ForceClearProximityBars(inst)
+    if inst.fuckbar then inst.fuckbar:Remove() inst.fuckbar = nil end
+
     if inst.partner then
-        inst:DoTaskInTime(0.1, 
-		function()
-		    if inst.partner and inst.partner.sg:HasStateTag("fuck") then
-		        if not inst.partner:HasTag("ropped") then
-				    inst.partner.sg:GoToState("idle")
-					inst.partner.sg:GoToState("wakeup")
-				else
-				    inst.partner.sg:GoToState("idle")
-		            inst.partner.sg:GoToState("wakeup")
-				end
-		    end
-			inst.partner = nil 
-		end)
-	end
+        inst:DoTaskInTime(0.1, function()
+            if inst.partner and inst.partner.fuckbar then inst.partner.fuckbar:Remove() inst.partner.fuckbar = nil end
+            if inst.partner and inst.partner.sg:HasStateTag("fuck") then
+                inst.partner.sg:GoToState("idle")
+                inst.partner.sg:GoToState("wakeup")
+            end
+            inst.partner = nil 
+        end)
+    end
+end
+
+local function GoAway(inst)
+    -- Hardware Sweep
+    ForceClearProximityBars(inst)
+    if inst.fuckbar then inst.fuckbar:Remove() inst.fuckbar = nil end
+    if inst.partner and inst.partner.fuckbar then inst.partner.fuckbar:Remove() inst.partner.fuckbar = nil end
+
+    inst.sg:GoToState("idle")
+    local fx = GLOBAL.SpawnPrefab("shadow_despawn")
+    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst:DoPeriodicTask(0.01, function()
+        inst:Remove()
+    end)
 end
 
 local function KillToy(inst)
@@ -623,65 +800,154 @@ AddModRPCHandler("LEWD", "CALL", function(inst, wtf, name, skin)
 	end
 end)
 
--- local function MakeCharlie()
-	-- local OhYesRightHere = nil
-	-- for k,ent in pairs(GLOBAL.Ents) do
-	    -- if ent.prefab == "firepit" then
-		    -- local player = GLOBAL.FindEntity(ent, 14, function(item) return item:HasTag("player") end, nil, { "" })  	
-            -- if player ~= nil then
-				-- OhYesRightHere = ent
-				-- break -- burn in hell "break"
-			-- end
-		-- end
-    -- end	
-	-- if OhYesRightHere then
-        -- local inst = GLOBAL.SpawnPrefab("willow")
-		-- local posedata = GiveMeNearPosePlz(OhYesRightHere, 3, false)
-		-- inst.Transform:SetPosition(posedata[1], posedata[2], posedata[3])
-        -- local fx = GLOBAL.SpawnPrefab("shadow_despawn")
-	    -- fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        -- local fx = GLOBAL.SpawnPrefab("shadow_shield3")
-	    -- fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        -- inst.AnimState:SetBuild("charlie_queen")
-	    -- inst.components.health:SetInvincible(true)
-	    -- inst:AddTag("CHARLIEBITCH")
-		-- inst:AddComponent("named")
-		-- inst.components.named:SetName("Charile")
-        -- if math.random()<0.5 then
-		    -- inst:AddTag("sexable")
-			-- inst:RemoveComponent("bj")
-		-- else
-		    -- inst:AddTag("bjable")
-			-- inst:RemoveComponent("sex")
-		-- end
-		-- if math.random()<0.1 then
-		    -- inst:RemoveComponent("sex")
-			-- inst:RemoveComponent("bj")
-			-- inst:RemoveTag("sexable")
-			-- inst:RemoveTag("bjable")
-			-- inst.sg:GoToState("fap_state")
-			-- inst:AddTag("NOCLICK")
-		-- end
-	    -- inst:WatchWorldState("cycles", GoAway)
-	-- end
--- end
+local function MakeCharlie()
+    -- Loop through active players instead of thousands of world entities for performance
+    for _, player in pairs(GLOBAL.AllPlayers) do
+        if player and player:IsValid() and not player:HasTag("playerghost") then
+            -- Find an active firepit close to this player
+            local firepit = GLOBAL.FindEntity(player, 16, function(item) 
+                return item.prefab == "firepit" 
+            end)
+            
+            if firepit then
+                local inst = GLOBAL.SpawnPrefab("willow")
+                -- Set position near the discovered firepit
+                local posedata = GiveMeNearPosePlz(firepit, 3, false)
+                inst.Transform:SetPosition(posedata[1], posedata[2], posedata[3])
+                
+                -- Play shadow transformation visual effects
+                local fx1 = GLOBAL.SpawnPrefab("shadow_despawn")
+                fx1.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                local fx2 = GLOBAL.SpawnPrefab("shadow_shield3")
+                fx2.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                
+                -- Morph Willow's model into Queen Charlie using the custom zip
+                inst.AnimState:SetBuild("charlie_queen")
+                inst.components.health:SetInvincible(true)
+                inst:AddTag("CHARLIEBITCH")
+                
+                -- COMPLETE SKIN LOCK: Forces the visual engine to maintain her mask when clothes change
+                inst:ListenForEvent("衣物更新", function(c) 
+                    if c and c.AnimState then c.AnimState:SetBuild("charlie_queen") end
+                end)
+                inst:ListenForEvent("animover", function(c) 
+                    if c and c:HasTag("CHARLIEBITCH") then c.AnimState:SetBuild("charlie_queen") end
+                end)
+                inst:DoPeriodicTask(0.1, function(c)
+                    if c and c.AnimState and c.AnimState:GetBuild() ~= "charlie_queen" then
+                        c.AnimState:SetBuild("charlie_queen")
+                    end
+                end)
+                
+                inst:AddComponent("named")
+                inst.components.named:SetName("Charlie") -- Fixed typo
+                
+                -- RNG Roll for interaction behaviors
+                local behavior_roll = math.random()
+                if behavior_roll < 0.45 then
+                    inst:AddTag("sexable")
+                    if inst.components.bj then inst:RemoveComponent("bj") end
+                elseif behavior_roll < 0.90 then
+                    inst:AddTag("bjable")
+                    if inst.components.sex then inst:RemoveComponent("sex") end
+                else
+                    -- 10% chance to activate the solo animation state graph
+                    if inst.components.sex then inst:RemoveComponent("sex") end
+                    if inst.components.bj then inst:RemoveComponent("bj") end
+                    inst:RemoveTag("sexable")
+                    inst:RemoveTag("bjable")
+                    inst:AddTag("NOCLICK")
+                    
+                    -- Safe state validation wrapper
+                    inst:DoTaskInTime(0.5, function(charlie)
+                        if charlie.sg and charlie.sg.HasStateTag and charlie.sg:HasStateTag("idle") then
+                            charlie.sg:GoToState("fap_state")
+                        end
+                    end)
+                end
+                
+                
+                -- Flag the world that she spawned tonight and exit
+                GLOBAL.TheWorld.charlieintheworld = true
+                GLOBAL.TheWorld.charlie_entity = inst
+                break 
+            end
+        end
+    end
+end
 
--- AddPrefabPostInit("world", function(inst)
-    -- if GLOBAL.TheWorld.ismastersim then
-	    -- inst.charlieintheworld = false
-		-- inst:DoPeriodicTask(1, function()
-		    -- if inst.charlieintheworld == false and GLOBAL.TheWorld.state.phase == "night" then
-                -- inst.charlieintheworld = true	
-				-- print("Now night, trying spawn charlie")
-				-- MakeCharlie()
-			-- end
-		-- end)
-		-- inst:WatchWorldState("cycles", function()
-		    -- inst.charlieintheworld = false
-		-- end)
-	-- end
--- end)
-
+-- ============================================================================
+-- CHARLIE WORLD GENERATION SPAWN TRAILING BUFFER
+-- ============================================================================
+AddPrefabPostInit("world", function(inst)
+    if GLOBAL.TheWorld.ismastersim then
+        inst.charlieintheworld = false
+        
+        -- Listen for the exact moment the world transitions into night phase
+        inst:WatchWorldState("phase", function(world, phase)
+            if phase == "night" then
+                print("[Mod Logging] Night phase triggered. Evaluating Charlie spawn conditions...")
+                
+                -- Condition A: Is Charlie already wandering the map?
+                if inst.charlieintheworld then
+                    print("[Mod Logging] Spawn skipped: Charlie is already present.")
+                    return
+                end
+                
+                -- Condition B: Roll a strict 10% RNG check for testing (1.00 for testing)
+                if math.random() > 0.25 then
+                    print("[Mod Logging] Spawn skipped: 10% RNG check failed.")
+                    return
+                end
+                
+                -- Condition C: Sweep active players to find a camp equipped with a sciencewife structure
+                for _, player in pairs(GLOBAL.AllPlayers) do
+                    if player and player:IsValid() and not player:HasTag("playerghost") then
+                        
+                        -- Look for a firepit close to the active player
+                        local firepit = GLOBAL.FindEntity(player, 16, function(item) 
+                            return item.prefab == "firepit" 
+                        end)
+                        
+                        if firepit then
+                            -- Validate that a sciencewife monument is constructed close to this exact firepit
+                            local has_monument = GLOBAL.FindEntity(firepit, 6, function(structure)
+                                return structure.prefab == "sciencewife"
+                            end)
+                            
+                            if has_monument then
+                                print("[Mod Logging] Success! Campfire with Monument verified. Summoning Charlie...")
+                                MakeCharlie()
+                                break -- Core anchor successfully spawned: Exit tracking loops safely!
+                            end
+                        end
+                    end
+                end
+                
+            elseif phase == "day" or phase == "dusk" then
+                inst.charlieintheworld = false
+                
+                -- 1. Directly remove the stored Charlie entity anywhere in the world
+                if inst.charlie_entity and inst.charlie_entity:IsValid() then
+                    print("[Mod Logging] Morning light detected: Dismissing Charlie from camp.")
+                    local fx = GLOBAL.SpawnPrefab("shadow_despawn")
+                    if fx then fx.Transform:SetPosition(inst.charlie_entity.Transform:GetWorldPosition()) end
+                    inst.charlie_entity:Remove()
+                end
+                inst.charlie_entity = nil
+                
+                -- 2. Backup sweep across the entire world (Ents) just in case
+                for _, ent in pairs(GLOBAL.Ents) do
+                    if ent and ent:IsValid() and ent.prefab == "willow" and ent:HasTag("CHARLIEBITCH") then
+                        local fx = GLOBAL.SpawnPrefab("shadow_despawn")
+                        if fx then fx.Transform:SetPosition(ent.Transform:GetWorldPosition()) end
+                        ent:Remove()
+                    end
+                end
+            end
+        end)
+    end
+end)
 local function ClientOpenNudeMenu(inst)
     if GLOBAL.TheCamera then
 	    GLOBAL.TheCamera:SetDistance(9)
@@ -756,10 +1022,56 @@ end
 
 
 local function MyPlayerMain(inst)
+    -- SAFE HARDWARE OVERRIDE: Satisfies componentactions.lua tracking loops
+    if inst.fuckerprefab_client == nil then
+        inst.fuckerprefab_client = {
+            value = function() return "" end,
+            set = function() end
+        }
+    end
+    
     inst.intim_gender = GetGenderStrings(inst.prefab) 
-	inst:AddTag(GetGenderStrings(inst.prefab)) 
-	inst:AddTag("bjable")
-	inst:AddTag("tieable")
+    inst:AddTag(GetGenderStrings(inst.prefab)) 
+    inst:AddTag("bjable")
+    inst:AddTag("tieable")
+	
+    -- ============================================================================
+    -- CHARLIE HIGHER-TIER PROTECTION & NIGHT VISION BUFF
+    -- ============================================================================
+    inst.charlie_nightvision_net = GLOBAL.net_bool(inst.GUID, "charlie.nightvision", "charlienightvisiondirty")
+    
+    inst:ListenForEvent("charlienightvisiondirty", function(player)
+        if player == GLOBAL.ThePlayer and player.components.playervision then
+            player.components.playervision:ForceNightVision(player.charlie_nightvision_net:value())
+        end
+    end)
+
+    if GLOBAL.TheWorld.ismastersim then
+        inst.charlie_buff_time = 0
+        
+        inst:DoPeriodicTask(1, function(player)
+            if player.charlie_buff_time and player.charlie_buff_time > 0 then
+                player.charlie_buff_time = player.charlie_buff_time - 1
+                
+                -- Cleanly remove modifiers when the clock hits 0
+                if player.charlie_buff_time <= 0 then
+                    if player.components.combat and player.components.combat.externaldamagetakenmultipliers then
+                        player.components.combat.externaldamagetakenmultipliers:RemoveModifier("charlie_shield")
+                    end
+                    if player.components.grue then
+                        player.components.grue:RemoveImmunity("charlie_blessing")
+                    end
+                    if player.charlie_nightvision_net then
+                        player.charlie_nightvision_net:set(false)
+                    end
+                    if player.components.talker then
+                        player.components.talker:Say("The Queen's embrace fades from my skin...")
+                    end
+                end
+            end
+        end)
+    end
+	
 	inst.AnimState:OverrideSymbol("sextalker", "sextalker", "sextalker")
 	
     GLOBAL.TheInput:AddKeyDownHandler(GLOBAL.KEY_N, function()
@@ -961,6 +1273,10 @@ local function MyPlayerMain(inst)
 	inst:ListenForEvent("stopfuck", StopFuck)
 	inst:ListenForEvent("stopmonsterfuck", StopMonsterFuck)
 	inst:ListenForEvent("ms_closewardrobe", NudeReset)
+	
+
+	
+	
 	inst:ListenForEvent("onremove", function()
 	    if inst.userid ~= nil and inst.userid ~= "" then
 		    GLOBAL.ClientChangedDisguise(inst.userid, "", "MyPlayerMain:onremove")
@@ -1036,19 +1352,19 @@ end
 AddPlayerPostInit(MyPlayerMain) -- Хук на персонажа
 
 
-local function MakeTinyChest(inst)
-    local posedata = GiveMeNearPosePlz(inst, 1, false)
-	local tiny = GLOBAL.SpawnPrefab("stockingschest")
-	tiny.Transform:SetPosition(posedata[1], posedata[2], posedata[3])
-	tiny:PushEvent("onbuilt")
-end
-
-AddPrefabPostInit("wardrobe",function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return inst
-    end
-	inst:ListenForEvent("onbuilt", MakeTinyChest)
-end)
+--local function MakeTinyChest(inst)
+--    local posedata = GiveMeNearPosePlz(inst, 1, false)
+--	local tiny = GLOBAL.SpawnPrefab("stockingschest")
+--	tiny.Transform:SetPosition(posedata[1], posedata[2], posedata[3])
+--	tiny:PushEvent("onbuilt")
+--end
+--
+--AddPrefabPostInit("wardrobe",function(inst)
+--    if not GLOBAL.TheWorld.ismastersim then
+--        return inst
+--   end
+--	inst:ListenForEvent("onbuilt", MakeTinyChest)
+--end)
 
 --clearpen
 
@@ -1157,7 +1473,8 @@ GLOBAL.SetSharedLootTable('hound_fire_new',
 GLOBAL.SetSharedLootTable('hound_cold_new',
 {
     {'buttplug_blue', 0.23},
-	{'monstermeat', 1.0},
+    {'stockings_shortblue', 0.15},
+    {'monstermeat', 1.0},
     {'houndstooth', 1.0},
     {'houndstooth', 1.0},
     {'bluegem',     0.2},
@@ -1166,6 +1483,7 @@ GLOBAL.SetSharedLootTable('hound_cold_new',
 GLOBAL.SetSharedLootTable('bishop_new',
 {
     {'gears',       1.0},
+	{'stockings_pants', 0.15},
     {'gears',       1.0},
     {'purplegem',   1.0},
 	{'vibrator', 0.33},
@@ -1174,6 +1492,7 @@ GLOBAL.SetSharedLootTable('bishop_new',
 GLOBAL.SetSharedLootTable('knight_new',
 {
     {'gears',  1.0},
+	{'stockings_pants', 0.15},
     {'gears',  1.0},
 	{'vibrator', 0.33},
 })
@@ -1181,6 +1500,7 @@ GLOBAL.SetSharedLootTable('knight_new',
 GLOBAL.SetSharedLootTable('rook_new',
 {
     {'gears',  1.0},
+	{'stockings_pants', 0.15},
     {'gears',  1.0},
 	{'vibrator', 0.33},
 })
@@ -1257,6 +1577,50 @@ GLOBAL.RemoveCensore = function(player)
 		-- end
     -- end	
 end
+
+-- HARDWARE UI TRANSITION HOOK: Safely handles asset thumbnails post-world gen
+AddPrefabPostInit("world", function(w)
+    if GLOBAL.AllRecipes and GLOBAL.AllRecipes["sciencewife"] then
+        local recipe = GLOBAL.AllRecipes["sciencewife"]
+        if recipe.ingredients then
+            for _, ing in ipairs(recipe.ingredients) do
+                if ing.type == "dildo_gold" then
+                    ing.atlas = "images/inventoryimages/dildo_gold.xml"
+                    ing.image = "dildo_gold.tex"
+                end
+            end
+        end
+    end
+end)
+
+-- ============================================================================
+-- PHYSICAL STANDALONE STRUCTURE LOGIC
+-- ============================================================================
+AddPrefabPostInit("sciencewife", function(inst)
+    GLOBAL.MakeObstaclePhysics(inst, .4)
+
+    if not GLOBAL.TheWorld.ismastersim then return inst end
+
+    -- Inspect Summon Routine
+    if not inst.components.inspectable then inst:AddComponent("inspectable") end
+    inst.components.inspectable.getdescription = function(shrine, viewer)
+        return "An elegantly crafted monument. It stands as a testament to your desires."
+    end
+
+    -- Hammer / Loot parameters
+    if not inst.components.workable then inst:AddComponent("workable") end
+    inst.components.workable:SetWorkAction(GLOBAL.ACTIONS.HAMMER)
+    inst.components.workable:SetWorkLeft(4)
+    inst.components.workable:SetOnFinishCallback(function(shrine, worker)
+        if shrine.components.lootdropper then shrine.components.lootdropper:DropLoot() end
+        shrine:Remove()
+    end)
+
+    if not inst.components.lootdropper then inst:AddComponent("lootdropper") end
+    inst.components.lootdropper:SetLoot({"boards", "marble"})
+    
+    inst:AddTag("structure")
+end)
 
 -- RemoveCensore(ThePlayer)
 

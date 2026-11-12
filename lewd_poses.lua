@@ -21,24 +21,24 @@ local function LinkPosesGroup(prefab, group)
 end
 
 GLOBAL.GetPosesGroup = function(prefab)  
-    -- Not need any calculating.
-	if prefab == "" then
-	    return ""
+    -- STEAM DECK PROXIMITY FIX: If scanned when not interacting, give a safe group
+    -- This skips the TheInput:CacheController() crash trap completely!
+	if prefab == "" or prefab == nil then
+	    return "player"
 	end
 	
 	local players = GLOBAL.GetActiveCharacterList()
 	for x = 1, #players, 1 do
-	 -- Players have not fixed prefab, they always by name of character
-	 -- So if is any of avalible character return that is player.
 	    if prefab == players[x] then
 		    return "player"
 		end
 	end
+
 	-- Checking array if we have linked poses group
 	if GLOBAL.POSES_BY_PREFAB[prefab] ~= nil then
 	    return GLOBAL.POSES_BY_PREFAB[prefab]
 	else
-	    return ""
+	    return "player" -- Fallback instead of a blank string
 	end
 end
 
