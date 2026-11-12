@@ -229,11 +229,40 @@ local FRAMES = GLOBAL.FRAMES
 local VoteUtil = GLOBAL.require("voteutil")
 local UserCommands = GLOBAL.require("usercommands")
 
--- Strict-safe placeholder function to prevent Rock Lobster crash
+-- Strict-safe placeholder functions to prevent vanilla DST update crashes
 if env and env.AddComponentPostInit then
     env.AddComponentPostInit("combat", function(self)
+        -- Keeps your Rock Lobster fix intact
         if self.SetHitArc == nil then
             self.SetHitArc = function() end
+        end
+        
+        -- Keeps your Spider Queen / follower fix intact
+        if self.CanBeAlly == nil then
+            self.CanBeAlly = function(self, guy)
+                return self.inst == guy or (self.inst.replica and self.inst.replica.combat and self.inst.replica.combat:IsAlly(guy)) or false
+            end
+        end
+
+        -- Fixes Bunnyman / Pigman / Spider ShareTarget crash
+        self.ShareTarget = function(self, target, range, fn, maxnum, musttags)
+            if maxnum <= 0 then
+                return
+            end
+            local x, y, z = self.inst.Transform:GetWorldPosition()
+            local ents = GLOBAL.TheSim:FindEntities(x, y, z, range, musttags)
+            local num_helpers = 0
+            for i, v in ipairs(ents) do
+                if v ~= self.inst
+                    and not (v.components.health ~= nil and v.components.health:IsDead())
+                    and fn(v, self.inst)
+                    and v.components.combat:SuggestTarget(target) then
+                    num_helpers = num_helpers + 1
+                    if num_helpers >= maxnum then
+                        break
+                    end
+                end
+            end
         end
     end)
 end
@@ -1323,19 +1352,19 @@ end
 AddPlayerPostInit(MyPlayerMain) -- Хук на персонажа
 
 
-local function MakeTinyChest(inst)
-    local posedata = GiveMeNearPosePlz(inst, 1, false)
-	local tiny = GLOBAL.SpawnPrefab("stockingschest")
-	tiny.Transform:SetPosition(posedata[1], posedata[2], posedata[3])
-	tiny:PushEvent("onbuilt")
-end
-
-AddPrefabPostInit("wardrobe",function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return inst
-    end
-	inst:ListenForEvent("onbuilt", MakeTinyChest)
-end)
+--local function MakeTinyChest(inst)
+--    local posedata = GiveMeNearPosePlz(inst, 1, false)
+--	local tiny = GLOBAL.SpawnPrefab("stockingschest")
+--	tiny.Transform:SetPosition(posedata[1], posedata[2], posedata[3])
+--	tiny:PushEvent("onbuilt")
+--end
+--
+--AddPrefabPostInit("wardrobe",function(inst)
+--    if not GLOBAL.TheWorld.ismastersim then
+--        return inst
+--   end
+--	inst:ListenForEvent("onbuilt", MakeTinyChest)
+--end)
 
 --clearpen
 
@@ -1444,7 +1473,8 @@ GLOBAL.SetSharedLootTable('hound_fire_new',
 GLOBAL.SetSharedLootTable('hound_cold_new',
 {
     {'buttplug_blue', 0.23},
-	{'monstermeat', 1.0},
+    {'stockings_shortblue', 0.15},
+    {'monstermeat', 1.0},
     {'houndstooth', 1.0},
     {'houndstooth', 1.0},
     {'bluegem',     0.2},
@@ -1453,6 +1483,7 @@ GLOBAL.SetSharedLootTable('hound_cold_new',
 GLOBAL.SetSharedLootTable('bishop_new',
 {
     {'gears',       1.0},
+	{'stockings_pants', 0.15},
     {'gears',       1.0},
     {'purplegem',   1.0},
 	{'vibrator', 0.33},
@@ -1461,6 +1492,7 @@ GLOBAL.SetSharedLootTable('bishop_new',
 GLOBAL.SetSharedLootTable('knight_new',
 {
     {'gears',  1.0},
+	{'stockings_pants', 0.15},
     {'gears',  1.0},
 	{'vibrator', 0.33},
 })
@@ -1468,6 +1500,7 @@ GLOBAL.SetSharedLootTable('knight_new',
 GLOBAL.SetSharedLootTable('rook_new',
 {
     {'gears',  1.0},
+	{'stockings_pants', 0.15},
     {'gears',  1.0},
 	{'vibrator', 0.33},
 })
